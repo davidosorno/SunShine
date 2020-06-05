@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="today"
+            type="com.dog.sunshine.data.weather.Weather" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:elevation="@dimen/defaultElevation">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="205dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="@dimen/titleTextSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/phDate"
+            app:setDay="@{today}"/>
+
+        <ImageView
+            android:id="@+id/img_weather_icon"
+            android:layout_width="100dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/phDate"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_high_temperature"
+            app:layout_constraintEnd_toStartOf="@+id/txt_high_temperature"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/txt_high_temperature"
+            app:srcCompat="@drawable/ic_clear"
+            app:setImage="@{today}"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_weather_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/middle"
+            app:layout_constraintEnd_toEndOf="@+id/img_weather_icon"
+            app:layout_constraintStart_toStartOf="@+id/img_weather_icon"
+            app:layout_constraintTop_toBottomOf="@+id/img_weather_icon"
+            android:text="@string/phWeatherDescription"
+            app:setDescription="@{today}"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_high_temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="72sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/img_weather_icon"
+            app:layout_constraintTop_toBottomOf="@+id/txt_date"
+            android:text="@string/phGrades"
+            app:setHighTemperature="@{today}"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_low_temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="42sp"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_weather_description"
+            app:layout_constraintEnd_toEndOf="@+id/txt_high_temperature"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/txt_high_temperature"
+            app:layout_constraintTop_toBottomOf="@+id/img_weather_icon"
+            android:text="@string/phGrades"
+            app:setLowTemperature="@{today}"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">SunShine</string>
+
+    <!--    Weather-->
+    <string name="clear">Clear</string>
+    <string name="cloudy">Cloudy</string>
+    <string name="fog">Fog</string>
+    <string name="light_cloud">Light Cloud</string>
+    <string name="light_rain">Light Rain</string>
+    <string name="rain">Rain</string>
+    <string name="storm">Storm</string>
+    <string name="snow">Snow</string>
+
+    <string name="humidity">Humidity</string>
+    <string name="pressure">Pressure</string>
+    <string name="wind">Wind</string>
+
+    <!--    Content Provider Authority-->
+    <string name="content_authority">com.dog.sunshine.data.provider</string>
+
+    <!--    PLACE HOLDERS-->
+    <string name="phDate">May 31, 2020</string>
+    <string name="phGrades">81\u00b0</string>
+    <string name="phWeatherDescription">Weather Description</string>
+    <string name="phHumidity">96 %</string>
+    <string name="phPressure">997 hPa</string>
+    <string name="phWind">1 km/h N</string>
+    <string name="concatExample">%s %s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>

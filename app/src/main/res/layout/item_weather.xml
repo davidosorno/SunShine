@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+    <data>
+        <variable
+            name="weather"
+            type="com.dog.sunshine.data.weather.Weather" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:background="@drawable/touch_selector"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?android:attr/listPreferredItemHeight"
+        android:padding="@dimen/defaultMargin"
+        tools:context=".MainActivity">
+
+        <ImageView
+            android:id="@+id/weather_icon"
+            android:layout_width="@dimen/listIcon"
+            android:layout_height="@dimen/listIcon"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline"
+            tools:src="@drawable/art_clouds"
+            android:contentDescription="@string/wind"
+            app:setImage="@{weather}"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/defaultMargin"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintLeft_toRightOf="@+id/weather_icon"
+            tools:text="Today, April 03"
+            app:setDay="@{weather}"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/weather_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/secondaryText"
+            app:layout_constraintLeft_toLeftOf="@+id/text_day"
+            app:layout_constraintTop_toTopOf="@+id/guideline"
+            tools:text="Rainy"
+            app:setDescription="@{weather}"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/high_temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/defaultMargin"
+            android:textColor="@color/primaryText"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintRight_toLeftOf="@+id/low_temperature"
+            app:layout_constraintTop_toTopOf="@+id/guideline"
+            tools:text="19\u00b0"
+            app:setHighTemperature="@{weather}"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/low_temperature"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            app:layout_constraintBottom_toBottomOf="@+id/guideline"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline"
+            tools:text="10\u00b0"
+            app:setLowTemperature="@{weather}"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

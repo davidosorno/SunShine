@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    Margin-->
+    <dimen name="defaultMargin">16dp</dimen>
+    <dimen name="middle">8dp</dimen>
+
+    <dimen name="defaultElevation">4dp</dimen>
+<!--    Icon-->
+    <dimen name="todayIcon">96dp</dimen>
+    <dimen name="listIcon">40dp</dimen>
+
+<!--    Text-->
+    <dimen name="defaultTextSize">12sp</dimen>
+    <dimen name="defaultWeightText">500sp</dimen>
+    <dimen name="titleTextSize">16sp</dimen>
+</resources>
