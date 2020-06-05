@@ -1,1 +1,1 @@
-Weather application appling Android Arquitecture Components
+Weather application using Android Architecture Components.
