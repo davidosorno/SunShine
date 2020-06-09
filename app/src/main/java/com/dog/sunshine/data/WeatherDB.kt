@@ -37,11 +37,17 @@ abstract class WeatherDB: RoomDatabase() {
                         DATABASE_NAME
                     )
                         .addCallback(object: Callback(){
-                            override fun onCreate(db: SupportSQLiteDatabase) {
-                                super.onCreate(db)
-                                populateDateDB(instance!!)
-                            }
-                        })
+//                            override fun onCreate(db: SupportSQLiteDatabase) {
+//                                super.onCreate(db)
+//                                populateDateDB(instance!!)
+//                            }
+//
+//                            override fun onOpen(db: SupportSQLiteDatabase) {
+//                                super.onOpen(db)
+//                                populateDateDB(instance!!)
+//                            }
+                        }
+                    )
                         .build()
                 }
                 INSTANCE = instance
@@ -50,23 +56,7 @@ abstract class WeatherDB: RoomDatabase() {
         }
 
         private fun populateDateDB(db: WeatherDB) {
-            val listWeather: ArrayList<Weather> = ArrayList()
-            for(i in 0..25) {
-                listWeather.add(
-                    Weather(
-                        date = Date().time,
-                        weatherId = 123123,
-                        max = 97,
-                        min = 42,
-                        wind = 1,
-                        location = 123,
-                        humidity = 12,
-                        pressure = 14
-                    )
-                )
-            }
-
-            executeThread { db.weatherDao().insertAll(*listWeather.toTypedArray()) }
+            TODO("Not implemented.")
         }
     }
 

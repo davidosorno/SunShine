@@ -1,8 +1,10 @@
 package com.dog.sunshine.util
 
 import android.content.ContentValues
+import android.view.View
 import com.dog.sunshine.data.provider.WeatherContract
 import com.dog.sunshine.data.weather.Weather
+import com.google.android.material.snackbar.Snackbar
 
 fun ContentValues.getStructure(item: ContentValues): Weather {
     return Weather(
@@ -18,3 +20,28 @@ fun ContentValues.getStructure(item: ContentValues): Weather {
     )
 }
 
+fun View.showSnackBar(msgId: Int){
+    showSnackBar(resources.getString(msgId))
+}
+
+fun View.showSnackBar(msg: String){
+    showSnackBar(
+        msg,
+        Snackbar.LENGTH_SHORT,
+        null) {}
+}
+
+fun View.showSnackBar(
+    msg: String,
+    length: Int,
+    actionMessage: Int?,
+    action: (View) -> Unit
+){
+    val snackBar = Snackbar.make(this, msg, length)
+    actionMessage?.let {
+
+        snackBar.setAction(resources.getString(actionMessage)){
+            action(this)
+        }.show()
+    }
+}
