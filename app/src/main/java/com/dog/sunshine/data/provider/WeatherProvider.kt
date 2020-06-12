@@ -1,6 +1,7 @@
 package com.dog.sunshine.data.provider
 
 import android.content.ContentProvider
+import android.content.ContentUris
 import android.content.ContentValues
 import android.content.UriMatcher
 import android.database.Cursor
@@ -15,7 +16,6 @@ import com.dog.sunshine.util.getStructure
 class WeatherProvider: ContentProvider() {
 
 //    define access to database
-    private lateinit var database: WeatherDB
     private lateinit var weatherDao: WeatherDao
 
     /*
@@ -40,6 +40,8 @@ class WeatherProvider: ContentProvider() {
 
     override fun bulkInsert(uri: Uri, values: Array<out ContentValues>): Int {
         val weatherValues: ArrayList<Weather> = ArrayList()
+        weatherDao = WeatherDB.getInstance(context!!).weatherDao()
+
         when(sUriMatcher.match(uri)) {
             CODE_WEATHER -> {
                 for (v: ContentValues in values) {
@@ -54,7 +56,6 @@ class WeatherProvider: ContentProvider() {
             }
         }
         return weatherValues.size
-//        return super.bulkInsert(uri, values)
     }
 
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
@@ -68,7 +69,18 @@ class WeatherProvider: ContentProvider() {
         selectionArgs: Array<out String>?,
         sortOrder: String?
     ): Cursor? {
-        TODO("Not yet implemented")
+        var cursor: Cursor? = null
+        when(sUriMatcher.match(uri)){
+            CODE_WEATHER -> {
+                cursor = weatherDao.getAllInCursor()
+            }
+
+            CODE_WEATHER_WITH_DATE -> {
+                cursor = weatherDao.getByDateInCursor(ContentUris.parseId(uri))
+            }
+        }
+        cursor?.setNotificationUri(context!!.contentResolver!!, uri)
+        return cursor
     }
 
 //    fun query(uri: Uri): LiveData<List<Weather>>{

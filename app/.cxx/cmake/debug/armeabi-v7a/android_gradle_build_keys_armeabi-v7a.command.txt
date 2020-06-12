@@ -1,0 +1,7 @@
+Executable : /home/daosgu/Android/Sdk/cmake/3.10.2.4988404/bin/ninja
+arguments : 
+-C
+/media/daosgu/hddLinux/prototypesApps/android/SunShine/app/.cxx/cmake/debug/armeabi-v7a
+keys
+jvmArgs : 
+

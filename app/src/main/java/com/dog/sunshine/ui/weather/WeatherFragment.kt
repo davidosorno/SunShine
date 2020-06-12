@@ -1,13 +1,15 @@
 package com.dog.sunshine.ui.weather
 
 import android.Manifest
+import android.app.Activity
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -17,12 +19,12 @@ import com.dog.sunshine.R
 import com.dog.sunshine.data.weather.Weather
 import com.dog.sunshine.databinding.ItemWeatherBinding
 import com.dog.sunshine.databinding.WeatherFragmentBinding
+import com.dog.sunshine.util.GPSLocation
+import com.dog.sunshine.util.PERMISSION_REQUEST_COARSE_LOCATION
 import com.dog.sunshine.util.showSnackBar
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.list_item.view.*
-
-
-const val PERMISSION_REQUEST_BACKGROUND_LOCATION = 0
+import kotlin.coroutines.coroutineContext
 
 class WeatherFragment : Fragment() {
 
@@ -31,6 +33,9 @@ class WeatherFragment : Fragment() {
     private lateinit var binding: WeatherFragmentBinding
     private lateinit var itemBinding: ItemWeatherBinding
     private lateinit var root: View
+    private lateinit var adapter: WeatherAdapter
+    private lateinit var gpsLocation: GPSLocation
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,7 +60,7 @@ class WeatherFragment : Fragment() {
             false
         )
 
-        val adapter = WeatherAdapter {
+        adapter = WeatherAdapter {
             onItemClick(it)
         }
         root.recycler_list_weather.adapter = adapter
@@ -65,6 +70,21 @@ class WeatherFragment : Fragment() {
                 adapter.submitList(it)
             }
         })
+
+        gpsLocation = GPSLocation(requireContext())
+        gpsLocation.location.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                viewModel.getData(it)
+            }
+        })
+
+        viewModel.showError.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                root.showSnackBar(it)
+                viewModel.cancelErrorMessage()
+            }
+        })
+
         return root
     }
 
@@ -74,23 +94,39 @@ class WeatherFragment : Fragment() {
         )
     }
 
-    override fun onStart() {
-        super.onStart()
-        canAccessLocation()
+    override fun onResume() {
+        super.onResume()
+         if(canAccessLocation()){
+             if(!gpsLocation.getLocationCoordinates()){
+                 root.showSnackBar(
+                     root.resources.getString(R.string.permission_required),
+                     Snackbar.LENGTH_INDEFINITE,
+                     R.string.ok
+                 ) {}
+             }
+         }
     }
 
     private fun makePermissionRequest() {
-        if(shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_BACKGROUND_LOCATION)){
+        if(shouldShowRequestPermissionRationale(
+                Manifest.permission.ACCESS_FINE_LOCATION
+            )
+        ) {
             root.showSnackBar(
-                resources.getString(R.string.permission_required),
+                root.resources.getString(R.string.permission_required),
                 Snackbar.LENGTH_INDEFINITE,
                 R.string.ok
-            ){
+            ) {
                 requestPermissions(
-                    arrayOf(Manifest.permission.ACCESS_BACKGROUND_LOCATION),
-                    PERMISSION_REQUEST_BACKGROUND_LOCATION
+                    arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
+                    PERMISSION_REQUEST_COARSE_LOCATION
                 )
             }
+        }else{
+            requestPermissions(
+                arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
+                PERMISSION_REQUEST_COARSE_LOCATION
+            )
         }
     }
 
@@ -99,7 +135,7 @@ class WeatherFragment : Fragment() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        if(requestCode == PERMISSION_REQUEST_BACKGROUND_LOCATION){
+        if(requestCode == PERMISSION_REQUEST_COARSE_LOCATION){
             if(grantResults.size == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 canAccessLocation()
             }else{
@@ -108,18 +144,22 @@ class WeatherFragment : Fragment() {
         }
     }
 
-    private fun canAccessLocation() {
-        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
-            if(ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_BACKGROUND_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED) {
-                viewModel.getData()
-            }else{
+    private fun canAccessLocation(): Boolean {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
+            if (checkSelfPermission(
+                    root.context,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED &&
+                checkSelfPermission(
+                    root.context,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
                 makePermissionRequest()
+            } else {
+                return true
             }
-        }else{
-            root.showSnackBar(R.string.permission_required)
         }
+        return false
     }
 }

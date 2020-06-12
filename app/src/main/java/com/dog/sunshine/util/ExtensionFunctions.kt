@@ -2,6 +2,7 @@ package com.dog.sunshine.util
 
 import android.content.ContentValues
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.dog.sunshine.data.provider.WeatherContract
 import com.dog.sunshine.data.weather.Weather
 import com.google.android.material.snackbar.Snackbar

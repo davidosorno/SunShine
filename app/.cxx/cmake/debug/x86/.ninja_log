@@ -1,0 +1,4 @@
+# ninja log v5
+0	1	0	clean	b9278082a5f245a7
+0	26	1592000340	CMakeFiles/keys.dir/keys.c.o	bd71f388cf1b32fc
+27	39	1592000340	/media/daosgu/hddLinux/prototypesApps/android/SunShine/app/build/intermediates/cmake/debug/obj/x86/libkeys.so	5a2f1931015529be

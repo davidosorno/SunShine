@@ -26,8 +26,13 @@ class WeatherRepository(
     }
 
     fun getWeatherList(): LiveData<PagedList<Weather>>{
+
         return LivePagedListBuilder(
             weatherDao.getAll(), 4
         ).build()
+    }
+
+    fun insert(weather: Weather): Long{
+        return weatherDao.insert(weather)
     }
 }

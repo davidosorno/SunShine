@@ -1,0 +1,2 @@
+[armeabi-v7a] Compile thumb  : keys <= keys.c
+[armeabi-v7a] SharedLibrary  : libkeys.so

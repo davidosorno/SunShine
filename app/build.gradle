@@ -91,4 +91,7 @@ dependencies {
 //    Convert data from Internet in Json Object
     implementation "com.squareup.moshi:moshi:$moshi_version"
     implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
+
+//    Allows us to get the last known location
+    implementation "com.google.android.gms:play-services-location:$google_play_location_version"
 }

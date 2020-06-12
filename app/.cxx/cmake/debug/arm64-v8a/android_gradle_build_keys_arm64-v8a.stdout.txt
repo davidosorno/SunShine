@@ -1,0 +1,2 @@
+ninja: Entering directory `/media/daosgu/hddLinux/prototypesApps/android/SunShine/app/.cxx/cmake/debug/arm64-v8a'
+ninja: no work to do.

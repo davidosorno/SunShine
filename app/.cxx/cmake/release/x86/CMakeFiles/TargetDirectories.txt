@@ -1,0 +1,3 @@
+/media/daosgu/hddLinux/prototypesApps/android/SunShine/app/.cxx/cmake/release/x86/CMakeFiles/rebuild_cache.dir
+/media/daosgu/hddLinux/prototypesApps/android/SunShine/app/.cxx/cmake/release/x86/CMakeFiles/edit_cache.dir
+/media/daosgu/hddLinux/prototypesApps/android/SunShine/app/.cxx/cmake/release/x86/CMakeFiles/keys.dir

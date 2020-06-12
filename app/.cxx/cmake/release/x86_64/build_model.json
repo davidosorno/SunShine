@@ -1,0 +1,203 @@
+{
+  "abi": "X86_64",
+  "abiPlatformVersion": 22,
+  "buildSettings": {
+    "environmentVariables": []
+  },
+  "cmake": {
+    "cmakeArtifactsBaseFolder": "/media/daosgu/hddLinux/prototypesApps/android/SunShine/app/.cxx/cmake/release/x86_64",
+    "cmakeServerLogFile": "/media/daosgu/hddLinux/prototypesApps/android/SunShine/app/.cxx/cmake/release/x86_64/cmake_server_log.txt",
+    "cmakeWrappingBaseFolder": "/media/daosgu/hddLinux/prototypesApps/android/SunShine/app/.cxx/cxx/release/x86_64",
+    "effectiveConfiguration": {
+      "name": "traditional-android-studio-cmake-environment",
+      "description": "Composite reified CMakeSettings configuration",
+      "generator": "Ninja",
+      "inheritEnvironments": [
+        "ndk"
+      ],
+      "buildRoot": "/media/daosgu/hddLinux/prototypesApps/android/SunShine/app/.cxx/cmake/release/x86_64",
+      "cmakeToolchain": "/home/daosgu/Android/Sdk/ndk-bundle/build/cmake/android.toolchain.cmake",
+      "cmakeExecutable": "/home/daosgu/Android/Sdk/cmake/3.10.2.4988404/bin/cmake",
+      "variables": [
+        {
+          "name": "CMAKE_FIND_ROOT_PATH",
+          "value": "/media/daosgu/hddLinux/prototypesApps/android/SunShine/app/.cxx/cmake/release/prefab/x86_64/prefab"
+        },
+        {
+          "name": "CMAKE_BUILD_TYPE",
+          "value": "Release"
+        },
+        {
+          "name": "CMAKE_TOOLCHAIN_FILE",
+          "value": "/home/daosgu/Android/Sdk/ndk-bundle/build/cmake/android.toolchain.cmake"
+        },
+        {
+          "name": "ANDROID_ABI",
+          "value": "x86_64"
+        },
+        {
+          "name": "ANDROID_NDK",
+          "value": "/home/daosgu/Android/Sdk/ndk-bundle"
+        },
+        {
+          "name": "ANDROID_PLATFORM",
+          "value": "android-22"
+        },
+        {
+          "name": "CMAKE_ANDROID_ARCH_ABI",
+          "value": "x86_64"
+        },
+        {
+          "name": "CMAKE_ANDROID_NDK",
+          "value": "/home/daosgu/Android/Sdk/ndk-bundle"
+        },
+        {
+          "name": "CMAKE_EXPORT_COMPILE_COMMANDS",
+          "value": "ON"
+        },
+        {
+          "name": "CMAKE_LIBRARY_OUTPUT_DIRECTORY",
+          "value": "/media/daosgu/hddLinux/prototypesApps/android/SunShine/app/build/intermediates/cmake/release/obj/x86_64"
+        },
+        {
+          "name": "CMAKE_MAKE_PROGRAM",
+          "value": "/home/daosgu/Android/Sdk/cmake/3.10.2.4988404/bin/ninja"
+        },
+        {
+          "name": "CMAKE_SYSTEM_NAME",
+          "value": "Android"
+        },
+        {
+          "name": "CMAKE_SYSTEM_VERSION",
+          "value": "22"
+        }
+      ]
+    }
+  },
+  "cxxBuildFolder": "/media/daosgu/hddLinux/prototypesApps/android/SunShine/app/.cxx/cmake/release/x86_64",
+  "info": {
+    "abi": "X86_64",
+    "bitness": 64,
+    "deprecated": false,
+    "default": true
+  },
+  "originalCxxBuildFolder": "/media/daosgu/hddLinux/prototypesApps/android/SunShine/app/.cxx/cmake/release/x86_64",
+  "variant": {
+    "buildSystemArgumentList": [],
+    "buildTargetSet": [],
+    "cFlagsList": [],
+    "cmakeSettingsConfiguration": "android-gradle-plugin-predetermined-name",
+    "cppFlagsList": [],
+    "isDebuggableEnabled": false,
+    "module": {
+      "buildSystem": "CMAKE",
+      "cmake": {
+        "cmakeExe": "/home/daosgu/Android/Sdk/cmake/3.10.2.4988404/bin/cmake",
+        "minimumCmakeVersion": "3.10.2",
+        "ninjaExe": "/home/daosgu/Android/Sdk/cmake/3.10.2.4988404/bin/ninja"
+      },
+      "cmakeToolchainFile": "/home/daosgu/Android/Sdk/ndk-bundle/build/cmake/android.toolchain.cmake",
+      "cxxFolder": "/media/daosgu/hddLinux/prototypesApps/android/SunShine/app/.cxx",
+      "gradleModulePathName": ":app",
+      "intermediatesFolder": "/media/daosgu/hddLinux/prototypesApps/android/SunShine/app/build/intermediates",
+      "makeFile": "/media/daosgu/hddLinux/prototypesApps/android/SunShine/app/src/main/jni/CMakeLists.txt",
+      "moduleBuildFile": "/media/daosgu/hddLinux/prototypesApps/android/SunShine/app/build.gradle",
+      "moduleRootFolder": "/media/daosgu/hddLinux/prototypesApps/android/SunShine/app",
+      "ndkDefaultAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkFolder": "/home/daosgu/Android/Sdk/ndk-bundle",
+      "ndkMetaAbiList": [
+        {
+          "abi": "ARMEABI_V7A",
+          "bitness": 32,
+          "deprecated": false,
+          "default": true
+        },
+        {
+          "abi": "ARM64_V8A",
+          "bitness": 64,
+          "deprecated": false,
+          "default": true
+        },
+        {
+          "abi": "X86",
+          "bitness": 32,
+          "deprecated": false,
+          "default": true
+        },
+        {
+          "abi": "X86_64",
+          "bitness": 64,
+          "deprecated": false,
+          "default": true
+        }
+      ],
+      "ndkMetaPlatforms": {
+        "min": 16,
+        "max": 29,
+        "aliases": {
+          "20": 19,
+          "25": 24,
+          "J": 16,
+          "J-MR1": 17,
+          "J-MR2": 18,
+          "K": 19,
+          "L": 21,
+          "L-MR1": 22,
+          "M": 23,
+          "N": 24,
+          "N-MR1": 24,
+          "O": 26,
+          "O-MR1": 27,
+          "P": 28,
+          "Q": 29
+        }
+      },
+      "ndkSupportedAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkDefaultStl": "LIBCXX_STATIC",
+      "ndkVersion": "21.2.6472646",
+      "project": {
+        "compilerSettingsCacheFolder": "/media/daosgu/hddLinux/prototypesApps/android/SunShine/.cxx",
+        "cxxFolder": "/media/daosgu/hddLinux/prototypesApps/android/SunShine/.cxx",
+        "isBuildOnlyTargetAbiEnabled": true,
+        "isCmakeBuildCohabitationEnabled": false,
+        "isNativeCompilerSettingsCacheEnabled": false,
+        "rootBuildGradleFolder": "/media/daosgu/hddLinux/prototypesApps/android/SunShine",
+        "sdkFolder": "/home/daosgu/Android/Sdk",
+        "isPrefabEnabled": false
+      },
+      "splitsAbiFilterSet": [],
+      "stlSharedObjectMap": {
+        "LIBCXX_SHARED": {
+          "ARMEABI_V7A": "/home/daosgu/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/libc++_shared.so",
+          "ARM64_V8A": "/home/daosgu/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/libc++_shared.so",
+          "X86": "/home/daosgu/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/i686-linux-android/libc++_shared.so",
+          "X86_64": "/home/daosgu/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/x86_64-linux-android/libc++_shared.so"
+        },
+        "LIBCXX_STATIC": {},
+        "NONE": {},
+        "SYSTEM": {}
+      }
+    },
+    "objFolder": "/media/daosgu/hddLinux/prototypesApps/android/SunShine/app/build/intermediates/cmake/release/obj",
+    "variantName": "release",
+    "validAbiList": [
+      "ARMEABI_V7A",
+      "ARM64_V8A",
+      "X86",
+      "X86_64"
+    ],
+    "prefabDirectory": "/media/daosgu/hddLinux/prototypesApps/android/SunShine/app/.cxx/cmake/release/prefab",
+    "prefabPackageDirectoryList": []
+  },
+  "prefabFolder": "/media/daosgu/hddLinux/prototypesApps/android/SunShine/app/.cxx/cmake/release/prefab/x86_64"
+}

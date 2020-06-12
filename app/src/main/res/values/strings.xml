@@ -32,6 +32,7 @@
     <string name="permission_required">Permission required</string>
     <string name="ok">OK</string>
     <string name="not_supported">Device not supported</string>
+    <string name="error_loading_data">Sorry, we can not load data.</string>
 
 
 </resources>
