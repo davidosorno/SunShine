@@ -1,2 +1,0 @@
-[arm64-v8a] Compile        : keys <= keys.c
-[arm64-v8a] SharedLibrary  : libkeys.so

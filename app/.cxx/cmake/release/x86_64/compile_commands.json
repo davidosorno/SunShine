@@ -1,7 +1,0 @@
-[
-{
-  "directory": "/media/daosgu/hddLinux/prototypesApps/android/SunShine/app/.cxx/cmake/release/x86_64",
-  "command": "/home/daosgu/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=x86_64-none-linux-android22 --gcc-toolchain=/home/daosgu/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/daosgu/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dkeys_EXPORTS  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -O2 -DNDEBUG  -fPIC   -o CMakeFiles/keys.dir/keys.c.o   -c /media/daosgu/hddLinux/prototypesApps/android/SunShine/app/src/main/jni/keys.c",
-  "file": "/media/daosgu/hddLinux/prototypesApps/android/SunShine/app/src/main/jni/keys.c"
-}
-]

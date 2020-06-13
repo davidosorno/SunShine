@@ -1,3 +1,0 @@
-/media/daosgu/hddLinux/prototypesApps/android/SunShine/app/.cxx/cmake/release/armeabi-v7a/CMakeFiles/rebuild_cache.dir
-/media/daosgu/hddLinux/prototypesApps/android/SunShine/app/.cxx/cmake/release/armeabi-v7a/CMakeFiles/edit_cache.dir
-/media/daosgu/hddLinux/prototypesApps/android/SunShine/app/.cxx/cmake/release/armeabi-v7a/CMakeFiles/keys.dir

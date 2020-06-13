@@ -1,2 +1,0 @@
-[x86_64] Compile        : keys <= keys.c
-[x86_64] SharedLibrary  : libkeys.so
