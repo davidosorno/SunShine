@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -8,9 +10,6 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
@@ -32,8 +31,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="@string/phDate"
-            app:setDay="@{today}"/>
+            app:setDescription="@{today}"/>
 
         <ImageView
             android:id="@+id/img_weather_icon"
@@ -56,7 +54,7 @@
             app:layout_constraintEnd_toEndOf="@+id/img_weather_icon"
             app:layout_constraintStart_toStartOf="@+id/img_weather_icon"
             app:layout_constraintTop_toBottomOf="@+id/img_weather_icon"
-            android:text="@string/phWeatherDescription"
+
             app:setDescription="@{today}"/>
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -69,7 +67,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/img_weather_icon"
             app:layout_constraintTop_toBottomOf="@+id/txt_date"
-            android:text="@string/phGrades"
+
             app:setHighTemperature="@{today}"/>
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -82,7 +80,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/txt_high_temperature"
             app:layout_constraintTop_toBottomOf="@+id/img_weather_icon"
-            android:text="@string/phGrades"
+
             app:setLowTemperature="@{today}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

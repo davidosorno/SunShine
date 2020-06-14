@@ -41,7 +41,7 @@ interface WeatherApiService {
         }
 
         suspend fun getTodayWeather(lat: Float, lon: Float): WeatherJsonObject{
-            return WeatherApi.retrofitService.getMyLocationWeather(
+            return retrofitService.getMyLocationWeather(
                 lat,
                 lon
             ).await()

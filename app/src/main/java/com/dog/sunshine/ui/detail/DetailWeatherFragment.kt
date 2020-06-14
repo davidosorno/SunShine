@@ -34,7 +34,7 @@ class DetailWeatherFragment : Fragment() {
             false
         )
         val weather = arguments?.getParcelable<Weather>(WEATHER_TABLE_NAME)
-        binding.todayLayout.today = weather
+//        binding.todayLayout.today = weather
         root.today_layout.setBackgroundResource(R.color.white)
         return root
     }

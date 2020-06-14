@@ -15,7 +15,7 @@ interface WeatherDao {
     fun insertAll(vararg obj: Weather)
 
     @Transaction
-    @Query("SELECT * FROM weather")
+    @Query("SELECT * FROM weather ORDER BY id DESC")
     fun getAll(): DataSource.Factory<Int, Weather>
 
     @Transaction

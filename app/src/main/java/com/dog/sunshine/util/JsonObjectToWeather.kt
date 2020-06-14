@@ -9,7 +9,6 @@ class JsonObjectToWeather {
         fun getDataFromJsonObject(json: WeatherJsonObject): Weather{
             return Weather(
                 id = json.id,
-                date = json.dt,
                 weatherId = json.id,
                 max = json.main.temp_max.toInt(),
                 min = json.main.temp_min.toInt(),

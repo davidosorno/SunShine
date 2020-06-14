@@ -11,7 +11,6 @@ import com.dog.sunshine.data.provider.WeatherContract.Companion.AUTHORITY
 import com.dog.sunshine.data.weather.Weather
 import com.dog.sunshine.data.weather.WeatherDao
 import com.dog.sunshine.util.WEATHER_TABLE_NAME
-import com.dog.sunshine.util.getStructure
 
 class WeatherProvider: ContentProvider() {
 
@@ -45,7 +44,7 @@ class WeatherProvider: ContentProvider() {
         when(sUriMatcher.match(uri)) {
             CODE_WEATHER -> {
                 for (v: ContentValues in values) {
-                    weatherValues.add(v.getStructure(v))
+//                    weatherValues.add(v.getStructure(v))
                     //TODO is date normalize
                 }
                 weatherDao.insertAll(*weatherValues.toTypedArray())

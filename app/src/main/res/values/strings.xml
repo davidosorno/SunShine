@@ -33,6 +33,7 @@
     <string name="ok">OK</string>
     <string name="not_supported">Device not supported</string>
     <string name="error_loading_data">Sorry, we can not load data.</string>
+    <string name="internet_required">Internet connection is required to start the app</string>
 
 
 </resources>

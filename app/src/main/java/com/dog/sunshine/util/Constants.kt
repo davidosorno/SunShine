@@ -10,6 +10,9 @@ const val COORD_LONG = "lon"
 
 const val API_URL = "https://api.openweathermap.org/data/2.5/"
 
+
+
+//The purpouse for this parameter and function is to test the application
 private val SINGLE_EXECUTOR = Executors.newSingleThreadExecutor()
 
 fun executeThread(f: () -> Unit){

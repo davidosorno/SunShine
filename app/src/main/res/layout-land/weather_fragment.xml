@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:theme="@style/AppTheme"
@@ -14,13 +15,24 @@
             android:id="@+id/today_layout"
             layout="@layout/today_info"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"/>
+            android:layout_height="match_parent"/>
 
         <include
             layout="@layout/list_item"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
-    </LinearLayout>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/today_layout" />
+
+        <ProgressBar
+            android:id="@+id/pb_loading_indicator"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_gravity="center"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/today_layout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

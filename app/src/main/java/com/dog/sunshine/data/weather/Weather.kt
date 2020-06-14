@@ -15,6 +15,7 @@ import com.dog.sunshine.data.provider.WeatherContract.Companion.COLUMN_PRESSURE
 import com.dog.sunshine.data.provider.WeatherContract.Companion.COLUMN_WEATHER_ID
 import com.dog.sunshine.data.provider.WeatherContract.Companion.COLUMN_WIND_SPEED
 import kotlinx.android.parcel.Parcelize
+import java.util.*
 
 @Entity(indices = [
         Index(COLUMN_DATE)
@@ -27,7 +28,7 @@ data class Weather(
 
     @NonNull
     @ColumnInfo(name = COLUMN_DATE)
-    val date: Long,
+    val date: Date = Date(),
 
     @NonNull
     @ColumnInfo(name = COLUMN_WEATHER_ID)

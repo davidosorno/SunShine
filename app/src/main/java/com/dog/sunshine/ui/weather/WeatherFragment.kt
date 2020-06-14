@@ -1,14 +1,12 @@
 package com.dog.sunshine.ui.weather
 
 import android.Manifest
-import android.app.Activity
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -17,75 +15,74 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.dog.sunshine.R
 import com.dog.sunshine.data.weather.Weather
-import com.dog.sunshine.databinding.ItemWeatherBinding
 import com.dog.sunshine.databinding.WeatherFragmentBinding
-import com.dog.sunshine.util.GPSLocation
-import com.dog.sunshine.util.PERMISSION_REQUEST_COARSE_LOCATION
-import com.dog.sunshine.util.showSnackBar
+import com.dog.sunshine.util.*
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.list_item.view.*
-import kotlin.coroutines.coroutineContext
+import kotlinx.android.synthetic.main.weather_fragment.view.*
 
 class WeatherFragment : Fragment() {
 
-
     private lateinit var viewModel: WeatherViewModel
     private lateinit var binding: WeatherFragmentBinding
-    private lateinit var itemBinding: ItemWeatherBinding
-    private lateinit var root: View
     private lateinit var adapter: WeatherAdapter
     private lateinit var gpsLocation: GPSLocation
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        root = inflater.inflate(R.layout.weather_fragment, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.weather_fragment, container, false)
 
         val factory = WeatherFactory(requireContext())
         viewModel = ViewModelProvider(this, factory)[WeatherViewModel::class.java]
 
-        binding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.weather_fragment,
-            container,
-            false
-        )
-
-        itemBinding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.item_weather,
-            container,
-            false
-        )
-
         adapter = WeatherAdapter {
             onItemClick(it)
         }
-        root.recycler_list_weather.adapter = adapter
+        binding.root.recycler_list_weather.adapter = adapter
 
-        viewModel.listWeather?.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                adapter.submitList(it)
+        viewModel.listWeather.observe(viewLifecycleOwner, Observer { listWeather ->
+            listWeather?.let {
+                adapter.submitList(listWeather)
+                if(listWeather.size > 0 && viewModel.checkTodayLoaded(listWeather[0]!!.date)) {
+                    binding.todayLayout.today = listWeather[0]!!
+                    binding.root.pb_loading_indicator.visibility = View.INVISIBLE
+                }else {
+                    getLocationToGetWeather()
+                }
+            }?: run {
+                binding.root.pb_loading_indicator.visibility = View.VISIBLE
             }
         })
 
         gpsLocation = GPSLocation(requireContext())
         gpsLocation.location.observe(viewLifecycleOwner, Observer {
             it?.let {
-                viewModel.getData(it)
+                if(requireContext().isInternetAvailable()){
+                    viewModel.getData(it)
+                }else{
+                    binding.root.showSnackBar(
+                        binding.root.resources.getString(R.string.internet_required),
+                        Snackbar.LENGTH_INDEFINITE,
+                        R.string.ok
+                    ) { closeApp() }
+                }
             }
         })
 
         viewModel.showError.observe(viewLifecycleOwner, Observer {
             it?.let {
-                root.showSnackBar(it)
+                binding.root.showSnackBar(it)
                 viewModel.cancelErrorMessage()
             }
         })
+        binding.lifecycleOwner = this
+        return binding.root
+    }
 
-        return root
+    private fun closeApp() {
+        activity?.finish()
     }
 
     private fun onItemClick(weather: Weather) {
@@ -96,15 +93,7 @@ class WeatherFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-         if(canAccessLocation()){
-             if(!gpsLocation.getLocationCoordinates()){
-                 root.showSnackBar(
-                     root.resources.getString(R.string.permission_required),
-                     Snackbar.LENGTH_INDEFINITE,
-                     R.string.ok
-                 ) {}
-             }
-         }
+        getLocationToGetWeather()
     }
 
     private fun makePermissionRequest() {
@@ -112,8 +101,8 @@ class WeatherFragment : Fragment() {
                 Manifest.permission.ACCESS_FINE_LOCATION
             )
         ) {
-            root.showSnackBar(
-                root.resources.getString(R.string.permission_required),
+            binding.root.showSnackBar(
+                binding.root.resources.getString(R.string.permission_required),
                 Snackbar.LENGTH_INDEFINITE,
                 R.string.ok
             ) {
@@ -147,11 +136,11 @@ class WeatherFragment : Fragment() {
     private fun canAccessLocation(): Boolean {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
             if (checkSelfPermission(
-                    root.context,
+                    binding.root.context,
                     Manifest.permission.ACCESS_COARSE_LOCATION
                 ) != PackageManager.PERMISSION_GRANTED &&
                 checkSelfPermission(
-                    root.context,
+                    binding.root.context,
                     Manifest.permission.ACCESS_FINE_LOCATION
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
@@ -161,5 +150,17 @@ class WeatherFragment : Fragment() {
             }
         }
         return false
+    }
+
+    private fun getLocationToGetWeather() {
+        if(canAccessLocation()){
+            if(!gpsLocation.getLocationCoordinates()){
+                binding.root.showSnackBar(
+                    binding.root.resources.getString(R.string.permission_required),
+                    Snackbar.LENGTH_INDEFINITE,
+                    R.string.ok
+                ) {}
+            }
+        }
     }
 }

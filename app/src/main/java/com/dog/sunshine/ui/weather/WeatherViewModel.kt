@@ -12,8 +12,9 @@ import com.dog.sunshine.data.networkservice.WeatherJsonObject
 import com.dog.sunshine.data.weather.Weather
 import com.dog.sunshine.data.weather.WeatherRepository
 import com.dog.sunshine.util.JsonObjectToWeather
+import com.dog.sunshine.util.isTodayLoaded
 import kotlinx.coroutines.*
-import org.json.JSONObject
+import java.util.*
 
 class WeatherViewModel(
     private val weatherRepository: WeatherRepository
@@ -24,16 +25,25 @@ class WeatherViewModel(
 
     val listWeather = MediatorLiveData<PagedList<Weather>>()
 
+    private val _todayWeather = MutableLiveData<Weather>()
+    val todayWeather: LiveData<Weather> = _todayWeather
+
     private val _showError = MutableLiveData<Int>()
     val showError: LiveData<Int>
         get() = _showError
 
+    private var isTodayWeatherLoaded = true
+
+    init {
+        listWeather.addSource(weatherRepository.getWeatherList(), listWeather::setValue)
+    }
+
     fun getData(location: Location) {
-        uiScope.launch {
-            if(getDataFromApi(location)){
-                listWeather.addSource(weatherRepository.getWeatherList(), listWeather::setValue)
-            }else{
-                _showError.value = R.string.error_loading_data
+        if(!isTodayWeatherLoaded) {
+            uiScope.launch {
+                if (!getDataFromApi(location)) {
+                    _showError.value = R.string.error_loading_data
+                }
             }
         }
     }
@@ -54,5 +64,10 @@ class WeatherViewModel(
 
     fun cancelErrorMessage(){
         _showError.value = null
+    }
+
+    fun checkTodayLoaded(lastDateLoaded: Date): Boolean{
+        isTodayWeatherLoaded = isTodayLoaded(lastDateLoaded)
+        return isTodayWeatherLoaded
     }
 }

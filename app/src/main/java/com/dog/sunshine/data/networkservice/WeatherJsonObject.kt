@@ -1,7 +1,6 @@
 package com.dog.sunshine.data.networkservice
 
 import androidx.room.Embedded
-import java.util.ArrayList
 
 data class WeatherJsonObject(
     val id:  Long,
@@ -15,14 +14,13 @@ data class WeatherJsonObject(
 
     @Embedded
     val main:  Main,
-    val visibility:  Long,
+    val visibility:  Long = 0L,
 
     @Embedded
     val wind:  Wind,
 
     @Embedded
     val clouds:  Clouds,
-    val dt:  Long,
 
     @Embedded
     val sys:  Sys,

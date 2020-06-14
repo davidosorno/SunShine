@@ -5,6 +5,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.dog.sunshine.R
 import com.dog.sunshine.data.weather.Weather
+import kotlinx.android.synthetic.main.fragment_detail_weather.view.*
 import kotlinx.android.synthetic.main.item_weather.view.*
 
 class WeatherViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
