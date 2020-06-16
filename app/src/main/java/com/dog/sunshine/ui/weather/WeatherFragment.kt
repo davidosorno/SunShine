@@ -2,7 +2,6 @@ package com.dog.sunshine.ui.weather
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,12 +13,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.dog.sunshine.R
-import com.dog.sunshine.data.weather.Weather
+import com.dog.sunshine.data.weather.current.Current
+import com.dog.sunshine.databinding.ItemWeatherBinding
 import com.dog.sunshine.databinding.WeatherFragmentBinding
 import com.dog.sunshine.util.*
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.list_item.view.*
 import kotlinx.android.synthetic.main.weather_fragment.view.*
+import java.util.*
 
 class WeatherFragment : Fragment() {
 
@@ -32,7 +33,12 @@ class WeatherFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.weather_fragment, container, false)
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.weather_fragment,
+            container,
+            false
+        )
 
         val factory = WeatherFactory(requireContext())
         viewModel = ViewModelProvider(this, factory)[WeatherViewModel::class.java]
@@ -44,15 +50,14 @@ class WeatherFragment : Fragment() {
 
         viewModel.listWeather.observe(viewLifecycleOwner, Observer { listWeather ->
             listWeather?.let {
-                adapter.submitList(listWeather)
-                if(listWeather.size > 0 && viewModel.checkTodayLoaded(listWeather[0]!!.date)) {
-                    binding.todayLayout.today = listWeather[0]!!
+                if(it.isNotEmpty()) {
+                    val lastDateLoaded: Current = listWeather[0]!!
                     binding.root.pb_loading_indicator.visibility = View.INVISIBLE
-                }else {
-                    getLocationToGetWeather()
+                    binding.root.today_layout.visibility = View.VISIBLE
+                    adapter.submitList(listWeather)
+                    binding.todayLayout.today = lastDateLoaded
+                    viewModel.checkTodayLoaded(lastDateLoaded.date)
                 }
-            }?: run {
-                binding.root.pb_loading_indicator.visibility = View.VISIBLE
             }
         })
 
@@ -60,7 +65,7 @@ class WeatherFragment : Fragment() {
         gpsLocation.location.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if(requireContext().isInternetAvailable()){
-                    viewModel.getData(it)
+                    viewModel.setLocation(it)
                 }else{
                     binding.root.showSnackBar(
                         binding.root.resources.getString(R.string.internet_required),
@@ -68,6 +73,15 @@ class WeatherFragment : Fragment() {
                         R.string.ok
                     ) { closeApp() }
                 }
+            }
+        })
+
+        viewModel.canLoadTodayWeather.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                if(it && viewModel.location.value != null){
+                    viewModel.getData(requireContext())
+                }
+                viewModel.cancelLoadingData()
             }
         })
 
@@ -85,15 +99,15 @@ class WeatherFragment : Fragment() {
         activity?.finish()
     }
 
-    private fun onItemClick(weather: Weather) {
+    private fun onItemClick(current: Current) {
         findNavController().navigate(
-            WeatherFragmentDirections.actionNavWeatherToDetailWeather(weather)
+            WeatherFragmentDirections.actionNavWeatherToDetailWeather(current)
         )
     }
 
-    override fun onResume() {
-        super.onResume()
-        getLocationToGetWeather()
+    override fun onStart() {
+        super.onStart()
+        makePermissionRequest()
     }
 
     private fun makePermissionRequest() {
@@ -108,13 +122,13 @@ class WeatherFragment : Fragment() {
             ) {
                 requestPermissions(
                     arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
-                    PERMISSION_REQUEST_COARSE_LOCATION
+                    PERMISSION_REQUEST_LOCATION
                 )
             }
         }else{
             requestPermissions(
                 arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
-                PERMISSION_REQUEST_COARSE_LOCATION
+                PERMISSION_REQUEST_LOCATION
             )
         }
     }
@@ -124,17 +138,7 @@ class WeatherFragment : Fragment() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        if(requestCode == PERMISSION_REQUEST_COARSE_LOCATION){
-            if(grantResults.size == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                canAccessLocation()
-            }else{
-                makePermissionRequest()
-            }
-        }
-    }
-
-    private fun canAccessLocation(): Boolean {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
+        if(requestCode == PERMISSION_REQUEST_LOCATION){
             if (checkSelfPermission(
                     binding.root.context,
                     Manifest.permission.ACCESS_COARSE_LOCATION
@@ -145,22 +149,19 @@ class WeatherFragment : Fragment() {
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
                 makePermissionRequest()
-            } else {
-                return true
+            } else if(grantResults.size == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getLocationToGetWeather()
             }
         }
-        return false
     }
 
     private fun getLocationToGetWeather() {
-        if(canAccessLocation()){
-            if(!gpsLocation.getLocationCoordinates()){
-                binding.root.showSnackBar(
-                    binding.root.resources.getString(R.string.permission_required),
-                    Snackbar.LENGTH_INDEFINITE,
-                    R.string.ok
-                ) {}
-            }
+        if(!gpsLocation.getLocationCoordinates()){
+            binding.root.showSnackBar(
+                binding.root.resources.getString(R.string.permission_required),
+                Snackbar.LENGTH_INDEFINITE,
+                R.string.ok
+            ) {}
         }
     }
 }

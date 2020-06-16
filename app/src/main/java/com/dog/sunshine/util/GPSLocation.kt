@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Build
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -24,7 +25,7 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlin.reflect.jvm.internal.impl.metadata.jvm.`JvmProtoBuf$StringTableTypes$RecordOrBuilder`
 
-const val PERMISSION_REQUEST_COARSE_LOCATION = 0
+const val PERMISSION_REQUEST_LOCATION = 0
 
 class GPSLocation(
     private val context: Context
@@ -48,6 +49,7 @@ class GPSLocation(
         ) {
             fusedLocation.lastLocation.addOnCompleteListener {
                 it.result?.let { lastLocation ->
+                    Log.i("DEBUGGING", lastLocation.toString())
                     _location.value = lastLocation
                 }
             }

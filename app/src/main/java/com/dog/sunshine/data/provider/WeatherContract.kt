@@ -11,6 +11,9 @@ class WeatherContract {
 
         const val COLUMN_DATE = "date"
 
+        const val COORD_LAT = "lat"
+        const val COORD_LONG = "lon"
+
         /* Weather ID as returned by API, used to identify the icon to be used */
         const val COLUMN_WEATHER_ID = "weather_id"
 
@@ -34,6 +37,18 @@ class WeatherContract {
          *
          * Note: These degrees are not to be confused with temperature degrees of the weather.
          */
-        const val COLUMN_LOCATION_DEGREES = "degrees"
+        const val COLUMN_WIND_DEGREES = "degrees"
+
+        const val COLUMN_ICON_WEATHER = "icon"
+
+        const val COLUMN_MAIN = "main"
+
+        const val COLUMN_DESCRIPTION = "description"
+
+        const val COLUMN_CITY_NAME = "city-name"
+
+        const val COLUMN_SUNRISE_TIME = "sunrise"
+
+        const val COLUMN_SUNSET_TIME = "sunset"
     }
 }

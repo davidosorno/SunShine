@@ -21,7 +21,7 @@
         android:label="DetailWeatherFragment"
         tools:layout="@layout/fragment_detail_weather">
         <argument
-            android:name="weather"
-            app:argType="com.dog.sunshine.data.weather.Weather"/>
+            android:name="current"
+            app:argType="com.dog.sunshine.data.weather.current.Current"/>
     </fragment>
 </navigation>

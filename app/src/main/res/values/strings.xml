@@ -18,13 +18,15 @@
     <!--    Content Provider Authority-->
     <string name="content_authority">com.dog.sunshine.data.provider</string>
 
-    <!--    PLACE HOLDERS-->
-    <string name="phDate">May 31, 2020</string>
-    <string name="phGrades">81\u00b0</string>
-    <string name="phWeatherDescription">Weather Description</string>
-    <string name="phHumidity">96 %</string>
-    <string name="phPressure">997 hPa</string>
-    <string name="phWind">1 km/h N</string>
+<!--    Replace values-->
+    <string name="date">%s</string>
+    <string name="max_temp">%s\u00b0</string>
+    <string name="min_temp">%s\u00b0</string>
+    <string name="weatherDescription">%s</string>
+    <string name="humidity_value">%s\u2030</string>
+    <string name="pressure_value">%shPa</string>
+    <string name="wind_speed">%skm/h N</string>
+
     <string name="concatExample">%s %s</string>
 
 <!--    ERROR MESSAGES-->

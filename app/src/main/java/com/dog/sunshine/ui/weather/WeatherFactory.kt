@@ -3,7 +3,7 @@ package com.dog.sunshine.ui.weather
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.dog.sunshine.data.weather.WeatherRepository
+import com.dog.sunshine.data.weather.current.CurrentRepository
 import java.lang.IllegalArgumentException
 
 class WeatherFactory(val context: Context): ViewModelProvider.NewInstanceFactory() {
@@ -12,7 +12,7 @@ class WeatherFactory(val context: Context): ViewModelProvider.NewInstanceFactory
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(WeatherViewModel::class.java)) {
             return WeatherViewModel(
-                WeatherRepository.getInstance(context)!!
+                CurrentRepository.getInstance(context)!!
             ) as T
         }
         throw IllegalArgumentException("Unknown View Model Class")

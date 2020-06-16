@@ -5,9 +5,6 @@ import java.util.concurrent.Executors
 const val DATABASE_NAME = "weather.db"
 const val WEATHER_TABLE_NAME = "weather"
 
-const val COORD_LAT = "lat"
-const val COORD_LONG = "lon"
-
 const val API_URL = "https://api.openweathermap.org/data/2.5/"
 
 

@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "4147f311a5deaeca477ce21ce28b8d07",
+    "identityHash": "a36f87e119ae92671a20b18f165042f9",
     "entities": [
       {
-        "tableName": "Weather",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `date` INTEGER NOT NULL, `weather_id` INTEGER NOT NULL, `max` INTEGER NOT NULL, `min` INTEGER NOT NULL, `humidity` INTEGER NOT NULL, `pressure` INTEGER NOT NULL, `wind` INTEGER NOT NULL, `degrees` INTEGER NOT NULL)",
+        "tableName": "Current",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `date` INTEGER NOT NULL, `weather_id` INTEGER NOT NULL, `max` INTEGER NOT NULL, `min` INTEGER NOT NULL, `humidity` INTEGER NOT NULL, `pressure` REAL NOT NULL, `wind` INTEGER NOT NULL, `degrees` INTEGER NOT NULL, `icon` TEXT NOT NULL, `main` TEXT NOT NULL, `description` TEXT NOT NULL, `city-name` TEXT NOT NULL, `sunset` INTEGER NOT NULL, `sunrise` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -47,7 +47,7 @@
           {
             "fieldPath": "pressure",
             "columnName": "pressure",
-            "affinity": "INTEGER",
+            "affinity": "REAL",
             "notNull": true
           },
           {
@@ -57,8 +57,44 @@
             "notNull": true
           },
           {
-            "fieldPath": "location",
+            "fieldPath": "winddegrees",
             "columnName": "degrees",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "icon",
+            "columnName": "icon",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "main",
+            "columnName": "main",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cityName",
+            "columnName": "city-name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sunset",
+            "columnName": "sunset",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sunrise",
+            "columnName": "sunrise",
             "affinity": "INTEGER",
             "notNull": true
           }
@@ -67,16 +103,16 @@
           "columnNames": [
             "id"
           ],
-          "autoGenerate": true
+          "autoGenerate": false
         },
         "indices": [
           {
-            "name": "index_Weather_date",
+            "name": "index_Current_date",
             "unique": false,
             "columnNames": [
               "date"
             ],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_Weather_date` ON `${TABLE_NAME}` (`date`)"
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_Current_date` ON `${TABLE_NAME}` (`date`)"
           }
         ],
         "foreignKeys": []
@@ -85,7 +121,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4147f311a5deaeca477ce21ce28b8d07')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a36f87e119ae92671a20b18f165042f9')"
     ]
   }
 }

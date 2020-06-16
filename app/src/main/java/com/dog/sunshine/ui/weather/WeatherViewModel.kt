@@ -1,5 +1,8 @@
 package com.dog.sunshine.ui.weather
 
+import android.content.Context
+import android.location.Address
+import android.location.Geocoder
 import android.location.Location
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
@@ -8,55 +11,67 @@ import androidx.lifecycle.ViewModel
 import androidx.paging.PagedList
 import com.dog.sunshine.R
 import com.dog.sunshine.data.networkservice.WeatherApiService
-import com.dog.sunshine.data.networkservice.WeatherJsonObject
-import com.dog.sunshine.data.weather.Weather
-import com.dog.sunshine.data.weather.WeatherRepository
+import com.dog.sunshine.data.networkservice.CurrentWeatherJsonObject
+import com.dog.sunshine.data.weather.current.Current
+import com.dog.sunshine.data.weather.current.CurrentRepository
 import com.dog.sunshine.util.JsonObjectToWeather
-import com.dog.sunshine.util.isTodayLoaded
+import com.dog.sunshine.util.canLoadTodayWeather
 import kotlinx.coroutines.*
 import java.util.*
 
 class WeatherViewModel(
-    private val weatherRepository: WeatherRepository
+    private val currentRepository: CurrentRepository
 ): ViewModel() {
 
     private val job = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + job)
 
-    val listWeather = MediatorLiveData<PagedList<Weather>>()
-
-    private val _todayWeather = MutableLiveData<Weather>()
-    val todayWeather: LiveData<Weather> = _todayWeather
+    val listWeather = MediatorLiveData<PagedList<Current>>()
 
     private val _showError = MutableLiveData<Int>()
     val showError: LiveData<Int>
         get() = _showError
 
-    private var isTodayWeatherLoaded = true
+    private val _canLoadTodayWeather = MutableLiveData<Boolean>()
+    val canLoadTodayWeather: LiveData<Boolean>
+        get() = _canLoadTodayWeather
+
+    private val _location = MutableLiveData<Location>()
+    val location: LiveData<Location>
+        get() = _location
 
     init {
-        listWeather.addSource(weatherRepository.getWeatherList(), listWeather::setValue)
+        listWeather.addSource(currentRepository.getWeatherList(), listWeather::setValue)
     }
 
-    fun getData(location: Location) {
-        if(!isTodayWeatherLoaded) {
-            uiScope.launch {
-                if (!getDataFromApi(location)) {
+    fun getData(context: Context) {
+        val geocoder = Geocoder(
+            context,
+            Locale.US
+        )
+        val listAddress: List<Address> = geocoder.getFromLocation(
+            location.value!!.latitude,
+            location.value!!.longitude,
+            1
+        )
+        uiScope.launch {
+            if(listAddress.isNotEmpty()){
+                if(!getDataFromApi(listAddress[0].locality)) {
                     _showError.value = R.string.error_loading_data
                 }
             }
         }
     }
 
-    private suspend fun getDataFromApi(location: Location):Boolean{
+    private suspend fun getDataFromApi(cityName: String):Boolean{
         var success: Long = 0
         withContext(Dispatchers.IO){
-            val jsonObject:WeatherJsonObject = WeatherApiService.WeatherApi.getTodayWeather(
-                location.latitude.toFloat(),
-                location.longitude.toFloat()
+            val jsonObjectCurrent: CurrentWeatherJsonObject = WeatherApiService.WeatherApi.getCurrentWeatherByGeoLocation(
+                location.value!!.latitude.toFloat(),
+                location.value!!.longitude.toFloat()
             )
-            val weather: Weather = JsonObjectToWeather.getDataFromJsonObject(jsonObject)
-            success = weatherRepository.insert(weather)
+            val current: Current = JsonObjectToWeather.getDataFromJsonObject(jsonObjectCurrent, cityName)
+            success = currentRepository.insert(current)
         }
         return success > 0
     }
@@ -66,8 +81,22 @@ class WeatherViewModel(
         _showError.value = null
     }
 
-    fun checkTodayLoaded(lastDateLoaded: Date): Boolean{
-        isTodayWeatherLoaded = isTodayLoaded(lastDateLoaded)
-        return isTodayWeatherLoaded
+    fun checkTodayLoaded(lastDateLoaded: Date?){
+        _canLoadTodayWeather.value = canLoadTodayWeather(lastDateLoaded)
+    }
+
+    fun setLocation(location: Location){
+        _location.value = location
+        checkTodayLoaded(
+            if(listWeather.value?.isNotEmpty()!!) {
+                listWeather.value?.get(0)?.date
+            }
+            else
+                null
+        )
+    }
+
+    fun cancelLoadingData() {
+        _canLoadTodayWeather.value = null
     }
 }

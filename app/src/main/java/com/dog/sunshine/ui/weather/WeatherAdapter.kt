@@ -5,45 +5,56 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.dog.sunshine.R
-import com.dog.sunshine.data.weather.Weather
+import com.dog.sunshine.data.weather.current.Current
+import com.dog.sunshine.databinding.ItemWeatherBinding
 
 class WeatherAdapter(
-    private val clickListener: (Weather) -> Unit
-): PagedListAdapter<Weather, WeatherViewHolder>(
+    private val clickListener: (Current) -> Unit
+): PagedListAdapter<Current, WeatherViewHolder>(
     DIFF_CALLBACK
 ) {
 
     companion object {
 
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Weather>() {
-            override fun areItemsTheSame(oldItem: Weather, newItem: Weather): Boolean {
-                return oldItem.id == newItem.id
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Current>() {
+            override fun areItemsTheSame(oldItem: Current, newItem: Current): Boolean {
+                return oldItem.date == newItem.date
             }
 
-            override fun areContentsTheSame(oldItem: Weather, newItem: Weather): Boolean {
+            override fun areContentsTheSame(oldItem: Current, newItem: Current): Boolean {
                 return oldItem == newItem
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherViewHolder {
-        val view = LayoutInflater.from(
-            parent.context
-        ).inflate(
-            R.layout.item_weather,
+//        val view = LayoutInflater.from(
+//            parent.context
+//        ).inflate(
+//            R.layout.item_weather,
+//            parent,
+//            false
+//        )
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val itemWeatherBinding: ItemWeatherBinding = ItemWeatherBinding.inflate(
+            layoutInflater,
             parent,
             false
         )
-        return WeatherViewHolder(view)
+        return WeatherViewHolder(itemWeatherBinding)
     }
 
     override fun onBindViewHolder(holder: WeatherViewHolder, position: Int) {
-        val weather: Weather? = getItem(position)
-        weather?.let {
+        val current: Current? = getItem(position)
+        current?.let {
+//            holder.bindData(
+//                it,
+//                holder.itemView.context,
+//                position,
+//                clickListener
+//            )
             holder.bindData(
                 it,
-                holder.itemView.context,
-                position,
                 clickListener
             )
         }

@@ -1,17 +1,11 @@
 package com.dog.sunshine.util
 
-import android.content.ContentValues
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import com.dog.sunshine.data.provider.WeatherContract
-import com.dog.sunshine.data.weather.Weather
 import com.google.android.material.snackbar.Snackbar
-import java.util.*
 
 //fun ContentValues.getStructure(item: ContentValues): Weather {
 //    return Weather(

@@ -1,14 +1,13 @@
 package com.dog.sunshine.data.networkservice
 
+import com.dog.sunshine.data.provider.WeatherContract.Companion.COORD_LAT
+import com.dog.sunshine.data.provider.WeatherContract.Companion.COORD_LONG
 import com.dog.sunshine.util.API_URL
 import com.dog.sunshine.util.ApiKey
-import com.dog.sunshine.util.COORD_LAT
-import com.dog.sunshine.util.COORD_LONG
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Deferred
-import org.json.JSONObject
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
@@ -27,24 +26,55 @@ private val retrofit = Retrofit.Builder()
 
 interface WeatherApiService {
 
-    @GET("weather")
-    fun getMyLocationWeather(
-        @Query(COORD_LAT) lat: Float,
-        @Query(COORD_LONG) lon: Float,
-        @Query("units") units: String = "metric",
-        @Query("appid") api_key: String = ApiKey.key()
-    ):Deferred<WeatherJsonObject>
-
     object WeatherApi {
         private val retrofitService : WeatherApiService by lazy {
             retrofit.create(WeatherApiService::class.java)
         }
 
-        suspend fun getTodayWeather(lat: Float, lon: Float): WeatherJsonObject{
-            return retrofitService.getMyLocationWeather(
+        suspend fun getCurrentWeatherByGeoLocation(lat: Float, lon: Float): CurrentWeatherJsonObject{
+            return retrofitService.getCurrentWeatherByGeoLocation(
                 lat,
                 lon
             ).await()
         }
+
+//        suspend fun getCurrentWeatherByCity(city: String): WeatherJsonObject{
+//            return retrofitService.getCurrentWeatherByCity(
+//                city
+//            ).await()
+//        }
+//
+//        suspend fun getCurrentWeatherByIdCity(idCity: Long): WeatherJsonObject{
+//            return retrofitService.getCurrentWeatherByIdCity(
+//                idCity
+//            ).await()
+//        }
     }
+
+    @GET("onecall")
+    fun getCurrentWeatherByGeoLocation(
+        @Query(COORD_LAT) lat: Float,
+        @Query(COORD_LONG) lon: Float,
+        @Query("units") units: String = "metric",
+        @Query("exclude") exclude: String = "minutely",
+        @Query("appid") api_key: String = ApiKey.key()
+    ):Deferred<CurrentWeatherJsonObject>
+
+
+//    @GET("onecall")
+//    fun getCurrentWeatherByCity(
+//        @Query("q") city: String,
+//        @Query("units") units: String = "metric",
+//        @Query("exclude") exclude: String = "minutely",
+//        @Query("appid") api_key: String = ApiKey.key()
+//    ):Deferred<WeatherJsonObject>
+//
+//
+//    @GET("weather")
+//    fun getCurrentWeatherByIdCity(
+//        @Query("id") idCity: Long,
+//        @Query("units") units: String = "metric",
+//        @Query("exclude") exclude: String = "minutely",
+//        @Query("appid") api_key: String = ApiKey.key()
+//    ):Deferred<WeatherJsonObject>
 }

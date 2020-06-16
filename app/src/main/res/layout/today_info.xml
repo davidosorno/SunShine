@@ -6,7 +6,7 @@
     <data>
         <variable
             name="today"
-            type="com.dog.sunshine.data.weather.Weather" />
+            type="com.dog.sunshine.data.weather.current.Current" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,62 +26,60 @@
             android:id="@+id/txt_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:textSize="@dimen/titleTextSize"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:setDescription="@{today}"/>
+            app:setDay="@{today}"
+            tools:text="@string/date" />
 
         <ImageView
             android:id="@+id/img_weather_icon"
             android:layout_width="100dp"
             android:layout_height="0dp"
-            android:contentDescription="@string/phDate"
+            android:contentDescription="@string/date"
             app:layout_constraintBottom_toBottomOf="@+id/txt_high_temperature"
             app:layout_constraintEnd_toStartOf="@+id/txt_high_temperature"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/txt_high_temperature"
-            app:srcCompat="@drawable/ic_clear"
-            app:setImage="@{today}"/>
+            app:setImage="@{today}"
+            app:srcCompat="@drawable/ic_clear" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_weather_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/middle"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_low_temperature"
             app:layout_constraintEnd_toEndOf="@+id/img_weather_icon"
             app:layout_constraintStart_toStartOf="@+id/img_weather_icon"
-            app:layout_constraintTop_toBottomOf="@+id/img_weather_icon"
-
-            app:setDescription="@{today}"/>
+            app:layout_constraintTop_toTopOf="@+id/txt_low_temperature"
+            app:setDescription="@{today}"
+            tools:text="@string/weatherDescription" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_high_temperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#000000"
-            android:textSize="72sp"
+            android:textSize="62sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/img_weather_icon"
             app:layout_constraintTop_toBottomOf="@+id/txt_date"
-
-            app:setHighTemperature="@{today}"/>
+            app:setMaxTemp="@{today}"
+            tools:text="@string/max_temp" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_low_temperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="42sp"
-            app:layout_constraintBottom_toBottomOf="@+id/txt_weather_description"
+            android:textSize="32sp"
             app:layout_constraintEnd_toEndOf="@+id/txt_high_temperature"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/txt_high_temperature"
-            app:layout_constraintTop_toBottomOf="@+id/img_weather_icon"
-
-            app:setLowTemperature="@{today}"/>
+            app:layout_constraintTop_toBottomOf="@+id/txt_high_temperature"
+            app:setMinTemp="@{today}"
+            tools:text="@string/min_temp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

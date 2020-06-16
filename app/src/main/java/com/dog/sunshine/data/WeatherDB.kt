@@ -5,16 +5,12 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import androidx.sqlite.db.SupportSQLiteDatabase
-import com.dog.sunshine.data.weather.Weather
-import com.dog.sunshine.data.weather.WeatherDao
+import com.dog.sunshine.data.weather.current.Current
+import com.dog.sunshine.data.weather.current.CurrentDao
 import com.dog.sunshine.util.DATABASE_NAME
-import com.dog.sunshine.util.executeThread
-import java.util.*
-import kotlin.collections.ArrayList
 
 @Database(entities = [
-        Weather::class
+        Current::class
     ],
     version = 1
 )
@@ -22,7 +18,7 @@ import kotlin.collections.ArrayList
 @TypeConverters(Converters::class)
 abstract class WeatherDB: RoomDatabase() {
 
-    abstract fun weatherDao(): WeatherDao
+    abstract fun weatherDao(): CurrentDao
 
     companion object{
         private var INSTANCE: WeatherDB? = null
