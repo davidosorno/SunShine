@@ -31,13 +31,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:setDay="@{today}"
-            tools:text="@string/date" />
+            tools:text="Mon, May 15 2020" />
 
         <ImageView
             android:id="@+id/img_weather_icon"
             android:layout_width="100dp"
             android:layout_height="0dp"
-            android:contentDescription="@string/date"
+            android:contentDescription="@string/weatherDescription"
             app:layout_constraintBottom_toBottomOf="@+id/txt_high_temperature"
             app:layout_constraintEnd_toStartOf="@+id/txt_high_temperature"
             app:layout_constraintHorizontal_bias="0.5"
@@ -55,7 +55,7 @@
             app:layout_constraintStart_toStartOf="@+id/img_weather_icon"
             app:layout_constraintTop_toTopOf="@+id/txt_low_temperature"
             app:setDescription="@{today}"
-            tools:text="@string/weatherDescription" />
+            tools:text="Weather description" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_high_temperature"
@@ -68,7 +68,7 @@
             app:layout_constraintStart_toEndOf="@+id/img_weather_icon"
             app:layout_constraintTop_toBottomOf="@+id/txt_date"
             app:setMaxTemp="@{today}"
-            tools:text="@string/max_temp" />
+            tools:text="30\u00b0" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_low_temperature"
@@ -79,7 +79,7 @@
             app:layout_constraintStart_toStartOf="@+id/txt_high_temperature"
             app:layout_constraintTop_toBottomOf="@+id/txt_high_temperature"
             app:setMinTemp="@{today}"
-            tools:text="@string/min_temp"/>
+            tools:text="18\u00b0"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

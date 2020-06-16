@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "a36f87e119ae92671a20b18f165042f9",
+    "identityHash": "53165abd7290f5c156d7d22051cff13a",
     "entities": [
       {
         "tableName": "Current",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `date` INTEGER NOT NULL, `weather_id` INTEGER NOT NULL, `max` INTEGER NOT NULL, `min` INTEGER NOT NULL, `humidity` INTEGER NOT NULL, `pressure` REAL NOT NULL, `wind` INTEGER NOT NULL, `degrees` INTEGER NOT NULL, `icon` TEXT NOT NULL, `main` TEXT NOT NULL, `description` TEXT NOT NULL, `city-name` TEXT NOT NULL, `sunset` INTEGER NOT NULL, `sunrise` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `date` INTEGER NOT NULL, `weather_id` INTEGER NOT NULL, `max` INTEGER NOT NULL, `min` INTEGER NOT NULL, `humidity` INTEGER NOT NULL, `pressure` REAL NOT NULL, `wind` INTEGER NOT NULL, `degrees` INTEGER NOT NULL, `icon` TEXT NOT NULL, `main` TEXT NOT NULL, `description` TEXT NOT NULL, `city-name` TEXT NOT NULL, `sunset` INTEGER NOT NULL, `sunrise` INTEGER NOT NULL, `longString` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -97,6 +97,12 @@
             "columnName": "sunrise",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "longString",
+            "columnName": "longString",
+            "affinity": "TEXT",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -121,7 +127,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a36f87e119ae92671a20b18f165042f9')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '53165abd7290f5c156d7d22051cff13a')"
     ]
   }
 }

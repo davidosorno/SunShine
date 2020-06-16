@@ -1,12 +1,11 @@
-package com.dog.sunshine.ui.weather
+package com.dog.sunshine.ui.weather.daily
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
-import com.dog.sunshine.R
 import com.dog.sunshine.data.weather.current.Current
-import com.dog.sunshine.databinding.ItemWeatherBinding
+import com.dog.sunshine.databinding.ItemWeatherDailyBinding
 
 class WeatherAdapter(
     private val clickListener: (Current) -> Unit
@@ -28,37 +27,24 @@ class WeatherAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherViewHolder {
-//        val view = LayoutInflater.from(
-//            parent.context
-//        ).inflate(
-//            R.layout.item_weather,
-//            parent,
-//            false
-//        )
         val layoutInflater = LayoutInflater.from(parent.context)
-        val itemWeatherBinding: ItemWeatherBinding = ItemWeatherBinding.inflate(
+        val itemWeatherBinding: ItemWeatherDailyBinding = ItemWeatherDailyBinding.inflate(
             layoutInflater,
             parent,
             false
         )
-        return WeatherViewHolder(itemWeatherBinding)
+        return WeatherViewHolder(
+            itemWeatherBinding
+        )
     }
 
     override fun onBindViewHolder(holder: WeatherViewHolder, position: Int) {
         val current: Current? = getItem(position)
         current?.let {
-//            holder.bindData(
-//                it,
-//                holder.itemView.context,
-//                position,
-//                clickListener
-//            )
             holder.bindData(
                 it,
                 clickListener
             )
         }
     }
-
-
 }

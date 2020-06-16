@@ -9,18 +9,17 @@ import java.util.*
 
 @BindingAdapter("setDay")
 fun AppCompatTextView.day(current: Current?){
-    text = resources.getString(
-        R.string.date,
-        setFormatDate(current?.date, "EEE, MMM dd yyyy")
-    )
+    text = setFormatDate(current?.date, "EEE, MMM dd yyyy")
 }
 
 @BindingAdapter("setDayAndHour")
 fun AppCompatTextView.dayAndHour(current: Current?){
-    text = resources.getString(
-        R.string.date,
-        setFormatDate(current?.date, "EEE, MMM dd yyyy HH:mm")
-    )
+    text = setFormatDate(current?.date, "EEE, MMM dd yyyy HH:mm")
+}
+
+@BindingAdapter("setHour")
+fun AppCompatTextView.hour(current: Current?){
+    text = setFormatDate(current?.date, "hh a")
 }
 
 @BindingAdapter("setImage")

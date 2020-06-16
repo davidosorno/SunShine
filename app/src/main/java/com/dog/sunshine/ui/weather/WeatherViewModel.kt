@@ -55,11 +55,12 @@ class WeatherViewModel(
             1
         )
         uiScope.launch {
-            if(listAddress.isNotEmpty()){
-                if(!getDataFromApi(listAddress[0].locality)) {
-                    _showError.value = R.string.error_loading_data
-                }
-            }
+//            TODO desbloquear funcion
+//            if(listAddress.isNotEmpty()){
+//                if(!getDataFromApi(listAddress[0].locality)) {
+//                    _showError.value = R.string.error_loading_data
+//                }
+//            }
         }
     }
 

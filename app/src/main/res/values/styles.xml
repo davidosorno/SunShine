@@ -21,7 +21,4 @@
     <style name="AppTheme.Detail" parent="Theme.AppCompat.DayNight">
         <item name="background">@color/detail_accent_pane_background</item>
     </style>
-
-
-
 </resources>

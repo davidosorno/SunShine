@@ -85,5 +85,8 @@ data class Current(
 
     @NonNull
     @ColumnInfo(name = COLUMN_SUNRISE_TIME)
-    val sunrise: Long
+    val sunrise: Long,
+
+    //todo        eliminar
+    val longString: String = ""
     ):Parcelable

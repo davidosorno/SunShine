@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="current"
+            type="com.dog.sunshine.data.weather.current.Current" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/defaultMargin"
+    android:padding="5dp">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/txt_hour"
+        app:layout_constraintStart_toStartOf="@+id/txt_hour"
+        app:layout_constraintTop_toBottomOf="@+id/txt_hour"
+        tools:text="30\u00b0"
+        app:setMaxTemp="@{current}"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_hour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/img_hourly_weather"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="2 PM"
+        app:setHour="@{current}"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_hourly_weather"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="@+id/temp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txt_hour"
+        tools:src="@drawable/ic_clear"
+        app:setImage="@{current}"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

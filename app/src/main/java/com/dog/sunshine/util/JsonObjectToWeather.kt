@@ -25,7 +25,9 @@ class JsonObjectToWeather {
                 description = jsonCurrent.current.weather[0].description,
                 cityName = cityName,
                 sunrise = jsonCurrent.current.sunrise,
-                sunset = jsonCurrent.current.sunset
+                sunset = jsonCurrent.current.sunset,
+
+                longString = jsonCurrent.toString()
             )
         }
     }

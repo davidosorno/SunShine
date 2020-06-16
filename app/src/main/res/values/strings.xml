@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">SunShine</string>
+    <string name="daily">Next Days</string>
+    <string name="hourly">Hourly</string>
 
     <!--    Weather-->
     <string name="clear">Clear</string>
@@ -19,7 +21,6 @@
     <string name="content_authority">com.dog.sunshine.data.provider</string>
 
 <!--    Replace values-->
-    <string name="date">%s</string>
     <string name="max_temp">%s\u00b0</string>
     <string name="min_temp">%s\u00b0</string>
     <string name="weatherDescription">%s</string>
