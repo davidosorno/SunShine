@@ -17,13 +17,14 @@ class WeatherContract {
         /* Weather ID as returned by API, used to identify the icon to be used */
         const val COLUMN_WEATHER_ID = "weather_id"
 
-        //TODO convert °C to °F
-        /* Min and max temperatures in °C for the day (stored as floats in the database) */
         const val COLUMN_MIN_TEMP = "min"
         const val COLUMN_MAX_TEMP = "max"
+        const val COLUMN_CURRENT_TEMP = "current_temp"
 
         /* Humidity is stored as a float representing percentage */
         const val COLUMN_HUMIDITY = "humidity"
+
+        const val COLUMN_FEELS_LIKE = "feels_like"
 
         /* Pressure is stored as a float representing percentage */
         const val COLUMN_PRESSURE = "pressure"
@@ -50,5 +51,10 @@ class WeatherContract {
         const val COLUMN_SUNRISE_TIME = "sunrise"
 
         const val COLUMN_SUNSET_TIME = "sunset"
+
+        const val COLUMN_DEW_POINT = "dew_point"
+        const val COLUMN_CLOUDS ="clouds"
+        const val COLUMN_UVI = "uvi"
+        const val COLUMN_VISIBILITY = "visibility"
     }
 }

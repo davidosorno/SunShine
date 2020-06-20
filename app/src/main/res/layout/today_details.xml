@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toTopOf="@+id/appCompatTextView"
-            app:setHumidity="@{today}"/>
+            app:setHumidity="@{today.humidity}"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/appCompatTextView2"
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toTopOf="@+id/appCompatTextView2"
-            app:setHighPressure="@{today}"/>
+            app:setHighPressure="@{today.pressure}"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/appCompatTextView3"
@@ -80,6 +80,6 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toTopOf="@+id/appCompatTextView3"
-            app:setWind="@{today}"/>
+            app:setWind="@{today.wind}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

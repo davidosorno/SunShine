@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.dog.sunshine.data.WeatherDB
+import com.dog.sunshine.data.networkservice.Daily
 
 class CurrentRepository(
     private val currentDao: CurrentDao
@@ -33,6 +34,10 @@ class CurrentRepository(
         return LivePagedListBuilder(
             currentDao.getAll(), 4
         ).build()
+    }
+
+    fun getCurrentAndDaily(): LiveData<Current>{
+        return currentDao.getCurrentAndDaily()
     }
 
     fun insert(current: Current): Long{

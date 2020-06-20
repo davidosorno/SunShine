@@ -2,7 +2,7 @@
 <layout>
     <data>
         <variable
-            name="current"
+            name="hourly"
             type="com.dog.sunshine.data.weather.current.Current" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -22,7 +22,7 @@
         app:layout_constraintStart_toStartOf="@+id/txt_hour"
         app:layout_constraintTop_toBottomOf="@+id/txt_hour"
         tools:text="30\u00b0"
-        app:setMaxTemp="@{current}"/>
+        app:setTemp="@{hourly.temp}"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txt_hour"
@@ -31,7 +31,7 @@
         app:layout_constraintStart_toEndOf="@+id/img_hourly_weather"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="2 PM"
-        app:setHour="@{current}"/>
+        app:setHour="@{hourly.date}"/>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_hourly_weather"
@@ -41,7 +41,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/txt_hour"
         tools:src="@drawable/ic_clear"
-        app:setImage="@{current}"/>
+        app:setImage="@{hourly.icon}"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

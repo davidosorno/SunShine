@@ -26,7 +26,7 @@ class WeatherViewModel(
     private val job = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + job)
 
-    val listWeather = MediatorLiveData<PagedList<Current>>()
+    val currentWeather = MediatorLiveData<Current>()
 
     private val _showError = MutableLiveData<Int>()
     val showError: LiveData<Int>
@@ -40,28 +40,18 @@ class WeatherViewModel(
     val location: LiveData<Location>
         get() = _location
 
+    private var cityName = ""
+
     init {
-        listWeather.addSource(currentRepository.getWeatherList(), listWeather::setValue)
+        currentWeather.addSource(currentRepository.getCurrentAndDaily(), currentWeather::setValue)
     }
 
-    fun getData(context: Context) {
-        val geocoder = Geocoder(
-            context,
-            Locale.US
-        )
-        val listAddress: List<Address> = geocoder.getFromLocation(
-            location.value!!.latitude,
-            location.value!!.longitude,
-            1
-        )
-        uiScope.launch {
-//            TODO desbloquear funcion
-//            if(listAddress.isNotEmpty()){
-//                if(!getDataFromApi(listAddress[0].locality)) {
-//                    _showError.value = R.string.error_loading_data
-//                }
+    fun getData() {
+//        uiScope.launch {
+//            if(!getDataFromApi(cityName)) {
+//                _showError.value = R.string.error_loading_data
 //            }
-        }
+//        }
     }
 
     private suspend fun getDataFromApi(cityName: String):Boolean{
@@ -86,15 +76,25 @@ class WeatherViewModel(
         _canLoadTodayWeather.value = canLoadTodayWeather(lastDateLoaded)
     }
 
-    fun setLocation(location: Location){
-        _location.value = location
-        checkTodayLoaded(
-            if(listWeather.value?.isNotEmpty()!!) {
-                listWeather.value?.get(0)?.date
-            }
-            else
-                null
+    fun setLocation(loc: Location, context: Context){
+        _location.value = loc
+        val geocoder = Geocoder(
+            context,
+            Locale.US
         )
+        val listAddress: List<Address> = geocoder.getFromLocation(
+            location.value!!.latitude,
+            location.value!!.longitude,
+            1
+        )
+        cityName = listAddress[0].locality
+//        if(currentWeather.value?.isNotEmpty()!!) {
+            if (cityName == currentWeather.value?.cityName) {
+                checkTodayLoaded(currentWeather.value?.date)
+                return
+            }
+//        }
+        checkTodayLoaded(null)
     }
 
     fun cancelLoadingData() {

@@ -15,6 +15,12 @@ interface CurrentDao: BasicOperationsDao<Current> {
     fun getAll(): DataSource.Factory<Int, Current>
 
     @Transaction
+    @Query("SELECT * FROM current")
+    fun getCurrentAndDaily(): LiveData<Current>
+
+
+
+    @Transaction
     @Query("SELECT * FROM current WHERE ${WeatherContract.COLUMN_DATE} = :date")
     fun getByDate(date: Long): LiveData<List<Current>>
 

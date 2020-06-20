@@ -6,38 +6,41 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
         android:baselineAligned="false"
         android:orientation="horizontal"
         android:theme="@style/AppTheme"
         tools:context=".MainActivity">
 
-        <include
-            android:id="@+id/today_layout"
-            layout="@layout/today_info"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="60dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:background="@color/colorPrimary"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <include
+                android:id="@+id/today_layout"
+                layout="@layout/today_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <include
+                layout="@layout/list_item_hourly"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="@dimen/defaultMargin" />
+        </LinearLayout>
 
         <include
-            layout="@layout/list_item_hourly"
-            android:layout_width="207dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/today_layout"
-            app:layout_constraintStart_toStartOf="@+id/today_layout"
-            app:layout_constraintTop_toBottomOf="@+id/today_layout" />
-
-        <include
-            android:id="@+id/include"
             layout="@layout/list_item_daily"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/today_layout" />
+            app:layout_constraintStart_toEndOf="@+id/linearLayout" />
 
         <ProgressBar
             android:id="@+id/pb_loading_indicator"

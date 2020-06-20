@@ -2,6 +2,7 @@
     <string name="app_name">SunShine</string>
     <string name="daily">Next Days</string>
     <string name="hourly">Hourly</string>
+    <string name="location_description">Location weather.</string>
 
     <!--    Weather-->
     <string name="clear">Clear</string>
@@ -21,12 +22,11 @@
     <string name="content_authority">com.dog.sunshine.data.provider</string>
 
 <!--    Replace values-->
-    <string name="max_temp">%s\u00b0</string>
-    <string name="min_temp">%s\u00b0</string>
+    <string name="value_temp">%d\u00b0</string>
     <string name="weatherDescription">%s</string>
-    <string name="humidity_value">%s\u2030</string>
-    <string name="pressure_value">%shPa</string>
-    <string name="wind_speed">%skm/h N</string>
+    <string name="humidity_value">%d\u2030</string>
+    <string name="pressure_value">%fhPa</string>
+    <string name="wind_speed">%dkm/h N</string>
 
     <string name="concatExample">%s %s</string>
 

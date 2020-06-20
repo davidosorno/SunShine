@@ -41,11 +41,11 @@ class WeatherProvider: ContentProvider() {
         val currentValues: ArrayList<Current> = ArrayList()
         currentDao = WeatherDB.getInstance(context!!).weatherDao()
 
+        //TODO create the good way to access by content provider
         when(sUriMatcher.match(uri)) {
             CODE_WEATHER -> {
                 for (v: ContentValues in values) {
 //                    weatherValues.add(v.getStructure(v))
-                    //TODO is date normalize
                 }
                 currentDao.insertAll(*currentValues.toTypedArray())
             }

@@ -7,8 +7,7 @@ import com.dog.sunshine.databinding.ItemWeatherHourlyBinding
 class WeatherHourlyViewHolder(val binding: ItemWeatherHourlyBinding) : RecyclerView.ViewHolder(binding.root) {
 
     fun bindData(current: Current) {
-        binding.current = current
+        binding.hourly = current
         binding.executePendingBindings()
     }
-
 }

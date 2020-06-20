@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "53165abd7290f5c156d7d22051cff13a",
+    "identityHash": "fb08195f6f61e9ed40696002317016b5",
     "entities": [
       {
         "tableName": "Current",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `date` INTEGER NOT NULL, `weather_id` INTEGER NOT NULL, `max` INTEGER NOT NULL, `min` INTEGER NOT NULL, `humidity` INTEGER NOT NULL, `pressure` REAL NOT NULL, `wind` INTEGER NOT NULL, `degrees` INTEGER NOT NULL, `icon` TEXT NOT NULL, `main` TEXT NOT NULL, `description` TEXT NOT NULL, `city-name` TEXT NOT NULL, `sunset` INTEGER NOT NULL, `sunrise` INTEGER NOT NULL, `longString` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `date` INTEGER NOT NULL, `weather_id` INTEGER NOT NULL, `current_temp` INTEGER NOT NULL, `feels_like` REAL NOT NULL, `max` INTEGER NOT NULL, `min` INTEGER NOT NULL, `humidity` INTEGER NOT NULL, `pressure` REAL NOT NULL, `dew_point` REAL NOT NULL, `clouds` REAL NOT NULL, `uvi` REAL NOT NULL, `visibility` INTEGER NOT NULL, `wind` INTEGER NOT NULL, `degrees` INTEGER NOT NULL, `icon` TEXT NOT NULL, `main` TEXT NOT NULL, `description` TEXT NOT NULL, `city-name` TEXT NOT NULL, `sunset` INTEGER NOT NULL, `sunrise` INTEGER NOT NULL, `arrHourly` TEXT NOT NULL, `arrDaily` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -24,6 +24,18 @@
             "fieldPath": "weatherId",
             "columnName": "weather_id",
             "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "temp",
+            "columnName": "current_temp",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "feelsLike",
+            "columnName": "feels_like",
+            "affinity": "REAL",
             "notNull": true
           },
           {
@@ -48,6 +60,30 @@
             "fieldPath": "pressure",
             "columnName": "pressure",
             "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dewPoint",
+            "columnName": "dew_point",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "clouds",
+            "columnName": "clouds",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "uvi",
+            "columnName": "uvi",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "visibility",
+            "columnName": "visibility",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -99,8 +135,14 @@
             "notNull": true
           },
           {
-            "fieldPath": "longString",
-            "columnName": "longString",
+            "fieldPath": "arrHourly",
+            "columnName": "arrHourly",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "arrDaily",
+            "columnName": "arrDaily",
             "affinity": "TEXT",
             "notNull": true
           }
@@ -109,7 +151,7 @@
           "columnNames": [
             "id"
           ],
-          "autoGenerate": false
+          "autoGenerate": true
         },
         "indices": [
           {
@@ -127,7 +169,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '53165abd7290f5c156d7d22051cff13a')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'fb08195f6f61e9ed40696002317016b5')"
     ]
   }
 }

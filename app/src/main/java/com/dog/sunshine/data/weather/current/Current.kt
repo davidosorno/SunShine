@@ -7,8 +7,12 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.dog.sunshine.data.provider.WeatherContract.Companion.COLUMN_CITY_NAME
+import com.dog.sunshine.data.provider.WeatherContract.Companion.COLUMN_CLOUDS
+import com.dog.sunshine.data.provider.WeatherContract.Companion.COLUMN_CURRENT_TEMP
 import com.dog.sunshine.data.provider.WeatherContract.Companion.COLUMN_DATE
 import com.dog.sunshine.data.provider.WeatherContract.Companion.COLUMN_DESCRIPTION
+import com.dog.sunshine.data.provider.WeatherContract.Companion.COLUMN_DEW_POINT
+import com.dog.sunshine.data.provider.WeatherContract.Companion.COLUMN_FEELS_LIKE
 import com.dog.sunshine.data.provider.WeatherContract.Companion.COLUMN_HUMIDITY
 import com.dog.sunshine.data.provider.WeatherContract.Companion.COLUMN_ICON_WEATHER
 import com.dog.sunshine.data.provider.WeatherContract.Companion.COLUMN_MAIN
@@ -17,11 +21,15 @@ import com.dog.sunshine.data.provider.WeatherContract.Companion.COLUMN_MIN_TEMP
 import com.dog.sunshine.data.provider.WeatherContract.Companion.COLUMN_PRESSURE
 import com.dog.sunshine.data.provider.WeatherContract.Companion.COLUMN_SUNRISE_TIME
 import com.dog.sunshine.data.provider.WeatherContract.Companion.COLUMN_SUNSET_TIME
+import com.dog.sunshine.data.provider.WeatherContract.Companion.COLUMN_UVI
+import com.dog.sunshine.data.provider.WeatherContract.Companion.COLUMN_VISIBILITY
 import com.dog.sunshine.data.provider.WeatherContract.Companion.COLUMN_WEATHER_ID
 import com.dog.sunshine.data.provider.WeatherContract.Companion.COLUMN_WIND_DEGREES
 import com.dog.sunshine.data.provider.WeatherContract.Companion.COLUMN_WIND_SPEED
 import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
 import java.util.*
+import kotlin.collections.ArrayList
 
 @Entity(indices = [
         Index(COLUMN_DATE)
@@ -29,23 +37,31 @@ import java.util.*
 )
 @Parcelize
 data class Current(
-    @PrimaryKey
-    val id: Int, //date in format ddd (day of the year)
+    @PrimaryKey(autoGenerate = true)
+    val id: Long = 0L,
 
     @ColumnInfo(name = COLUMN_DATE)
     val date: Date = Date(),
 
     @NonNull
     @ColumnInfo(name = COLUMN_WEATHER_ID)
-    val weatherId: Long,
+    val weatherId: Long = 0L,
+
+    @NonNull
+    @ColumnInfo(name = COLUMN_CURRENT_TEMP)
+    val temp: Int = 0,
+
+    @NonNull
+    @ColumnInfo(name = COLUMN_FEELS_LIKE)
+    val feelsLike: Float = 0F,
 
     @NonNull
     @ColumnInfo(name = COLUMN_MAX_TEMP)
-    val max: Int,
+    val max: Int = 0,
 
     @NonNull
     @ColumnInfo(name = COLUMN_MIN_TEMP)
-    val min: Int,
+    val min: Int = 0,
 
     @NonNull
     @ColumnInfo(name = COLUMN_HUMIDITY)
@@ -54,6 +70,22 @@ data class Current(
     @NonNull
     @ColumnInfo(name = COLUMN_PRESSURE)
     val pressure: Float,
+
+    @NonNull
+    @ColumnInfo(name = COLUMN_DEW_POINT)
+    val dewPoint: Float = 0F,
+
+    @NonNull
+    @ColumnInfo(name = COLUMN_CLOUDS)
+    val clouds: Float = 0F,
+
+    @NonNull
+    @ColumnInfo(name = COLUMN_UVI)
+    val uvi: Float = 0F,
+
+    @NonNull
+    @ColumnInfo(name = COLUMN_VISIBILITY)
+    val visibility: Long = 0L,
 
     @NonNull
     @ColumnInfo(name = COLUMN_WIND_SPEED)
@@ -77,7 +109,7 @@ data class Current(
 
     @NonNull
     @ColumnInfo(name = COLUMN_CITY_NAME)
-    val cityName: String,
+    val cityName: String = "",
 
     @NonNull
     @ColumnInfo(name = COLUMN_SUNSET_TIME)
@@ -87,6 +119,7 @@ data class Current(
     @ColumnInfo(name = COLUMN_SUNRISE_TIME)
     val sunrise: Long,
 
-    //todo        eliminar
-    val longString: String = ""
+    val arrHourly: @RawValue List<Current> = ArrayList(), //MainData
+
+    val arrDaily: @RawValue List<Current> = ArrayList() //Daily
     ):Parcelable

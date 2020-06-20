@@ -15,7 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.dog.sunshine.R
 import com.dog.sunshine.data.weather.current.Current
 import com.dog.sunshine.databinding.WeatherFragmentBinding
-import com.dog.sunshine.ui.weather.daily.WeatherAdapter
+import com.dog.sunshine.ui.weather.daily.DailyWeatherAdapter
 import com.dog.sunshine.ui.weather.hourly.WeatherHourlyAdapter
 import com.dog.sunshine.util.*
 import com.google.android.material.snackbar.Snackbar
@@ -42,40 +42,38 @@ class WeatherFragment : Fragment() {
         val factory = WeatherFactory(requireContext())
         val viewModel: WeatherViewModel = ViewModelProvider(this, factory)[WeatherViewModel::class.java]
 
-        val dailyAdapter = WeatherAdapter {
-            onItemClick(it)
-        }
-
         binding.root.today_layout.setOnClickListener {todayView ->
             todayView?.let {
-                viewModel.listWeather.value?.get(0)?.let {
+                viewModel.currentWeather.value?.let {
                     onItemClick(it)
                 }
             }
         }
 
-        binding.root.recycler_list_weather.adapter = dailyAdapter
-
-        viewModel.listWeather.observe(viewLifecycleOwner, Observer { listWeather ->
-            listWeather?.let {
-                if(it.isNotEmpty()) {
-                    val lastDateLoaded: Current = listWeather[0]!!
-                    binding.root.pb_loading_indicator.visibility = View.INVISIBLE
+        viewModel.currentWeather.observe(viewLifecycleOwner, Observer { lastDateLoaded ->
+            lastDateLoaded?.let {
+                binding.root.pb_loading_indicator.visibility = View.INVISIBLE
                     binding.root.today_layout.visibility = View.VISIBLE
-                    dailyAdapter.submitList(listWeather)
+
+                    val dailyAdapter = DailyWeatherAdapter(
+                        it.arrDaily
+                    ){current ->
+                        onItemClick(current)
+                    }
+                    binding.root.recycler_list_weather.adapter = dailyAdapter
                     binding.todayLayout.today = lastDateLoaded
                     viewModel.checkTodayLoaded(lastDateLoaded.date)
-                    val hourlyAdapter = WeatherHourlyAdapter(it)
+
+                    val hourlyAdapter = WeatherHourlyAdapter(it.arrHourly)
                     binding.root.list_weather_hourly.adapter = hourlyAdapter
                 }
-            }
-        })
+            })
 
         gpsLocation = GPSLocation(requireContext())
         gpsLocation.location.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if(requireContext().isInternetAvailable()){
-                    viewModel.setLocation(it)
+                    viewModel.setLocation(it, requireContext())
                 }else{
                     binding.root.showSnackBar(
                         binding.root.resources.getString(R.string.internet_required),
@@ -89,7 +87,7 @@ class WeatherFragment : Fragment() {
         viewModel.canLoadTodayWeather.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if(it && viewModel.location.value != null){
-                    viewModel.getData(requireContext())
+                    viewModel.getData()
                 }
                 viewModel.cancelLoadingData()
             }

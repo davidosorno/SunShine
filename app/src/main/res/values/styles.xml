@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
 
@@ -20,5 +20,15 @@
 
     <style name="AppTheme.Detail" parent="Theme.AppCompat.DayNight">
         <item name="background">@color/detail_accent_pane_background</item>
+    </style>
+
+    <style name="fragmentLabels" parent="TextAppearance.AppCompat.Title">
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/middle</item>
+        <item name="android:background">@drawable/text_view_round_corners</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:padding">2dp</item>
     </style>
 </resources>

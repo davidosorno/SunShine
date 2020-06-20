@@ -33,15 +33,6 @@ abstract class WeatherDB: RoomDatabase() {
                         DATABASE_NAME
                     )
                         .addCallback(object: Callback(){
-//                            override fun onCreate(db: SupportSQLiteDatabase) {
-//                                super.onCreate(db)
-//                                populateDateDB(instance!!)
-//                            }
-//
-//                            override fun onOpen(db: SupportSQLiteDatabase) {
-//                                super.onOpen(db)
-//                                populateDateDB(instance!!)
-//                            }
                         }
                     )
                         .build()
@@ -49,10 +40,6 @@ abstract class WeatherDB: RoomDatabase() {
                 INSTANCE = instance
                 return instance
             }
-        }
-
-        private fun populateDateDB(db: WeatherDB) {
-            TODO("Not implemented.")
         }
     }
 

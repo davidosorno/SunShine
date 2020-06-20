@@ -22,6 +22,32 @@
             android:orientation="vertical"
             app:layout_constraintGuide_begin="205dp" />
 
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/location_description"
+            android:src="@drawable/ic_location"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_city"
+            app:layout_constraintEnd_toStartOf="@+id/txt_city"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/txt_date"
+            app:layout_constraintTop_toTopOf="@+id/txt_city" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/defaultMargin"
+            android:contentDescription="@string/location_description"
+            android:textSize="@dimen/titleTextSize"
+            app:layout_constraintEnd_toEndOf="@+id/txt_date"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageView4"
+            app:layout_constraintTop_toTopOf="parent"
+            app:setStringValue="@{today.cityName}"
+            tools:text="San Jose" />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_date"
             android:layout_width="wrap_content"
@@ -29,8 +55,8 @@
             android:textSize="@dimen/titleTextSize"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:setDay="@{today}"
+            app:layout_constraintTop_toBottomOf="@+id/txt_city"
+            app:setCurrentDate="@{today.date}"
             tools:text="Mon, May 15 2020" />
 
         <ImageView
@@ -38,12 +64,12 @@
             android:layout_width="100dp"
             android:layout_height="0dp"
             android:contentDescription="@string/weatherDescription"
-            app:layout_constraintBottom_toBottomOf="@+id/txt_high_temperature"
-            app:layout_constraintEnd_toStartOf="@+id/txt_high_temperature"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_current_temp"
+            app:layout_constraintEnd_toStartOf="@+id/txt_current_temp"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/txt_high_temperature"
-            app:setImage="@{today}"
+            app:layout_constraintTop_toTopOf="@+id/txt_current_temp"
+            app:setImage="@{today.icon}"
             app:srcCompat="@drawable/ic_clear" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -54,32 +80,55 @@
             app:layout_constraintEnd_toEndOf="@+id/img_weather_icon"
             app:layout_constraintStart_toStartOf="@+id/img_weather_icon"
             app:layout_constraintTop_toTopOf="@+id/txt_low_temperature"
-            app:setDescription="@{today}"
+            app:setStringValue="@{today.description}"
             tools:text="Weather description" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_current_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="62sp"
+            app:layout_constraintEnd_toEndOf="@+id/txt_low_temperature"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/txt_high_temperature"
+            app:layout_constraintTop_toBottomOf="@+id/txt_date"
+            app:setTemp="@{today.temp}"
+            tools:text="30\u00b0" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_high_temperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#000000"
-            android:textSize="62sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="26sp"
+            app:layout_constraintEnd_toStartOf="@+id/txt_low_temperature"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/img_weather_icon"
-            app:layout_constraintTop_toBottomOf="@+id/txt_date"
-            app:setMaxTemp="@{today}"
-            tools:text="30\u00b0" />
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/txt_low_temperature"
+            app:setTemp="@{today.max}"
+            tools:text="18\u00b0" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_low_temperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="32sp"
-            app:layout_constraintEnd_toEndOf="@+id/txt_high_temperature"
-            app:layout_constraintStart_toStartOf="@+id/txt_high_temperature"
-            app:layout_constraintTop_toBottomOf="@+id/txt_high_temperature"
-            app:setMinTemp="@{today}"
-            tools:text="18\u00b0"/>
+            android:textSize="26sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/txt_high_temperature"
+            app:layout_constraintTop_toBottomOf="@+id/txt_current_temp"
+            app:setTemp="@{today.min}"
+            tools:text="18\u00b0" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:textSize="26sp"
+            app:layout_constraintEnd_toStartOf="@+id/txt_low_temperature"
+            app:layout_constraintStart_toEndOf="@+id/txt_high_temperature"
+            app:layout_constraintTop_toTopOf="@+id/txt_low_temperature" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
