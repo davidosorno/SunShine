@@ -97,4 +97,5 @@ dependencies {
 
 //    Convert ArrayList to Json String and viceversa
     implementation "com.google.code.gson:gson:$gson_version"
+
 }

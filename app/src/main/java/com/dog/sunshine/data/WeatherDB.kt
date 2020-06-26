@@ -5,12 +5,12 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.dog.sunshine.data.weather.current.Current
-import com.dog.sunshine.data.weather.current.CurrentDao
+import com.dog.sunshine.data.weather.CurrentWeather
+import com.dog.sunshine.data.weather.CurrentWeatherDao
 import com.dog.sunshine.util.DATABASE_NAME
 
 @Database(entities = [
-        Current::class
+        CurrentWeather::class
     ],
     version = 1
 )
@@ -18,7 +18,7 @@ import com.dog.sunshine.util.DATABASE_NAME
 @TypeConverters(Converters::class)
 abstract class WeatherDB: RoomDatabase() {
 
-    abstract fun weatherDao(): CurrentDao
+    abstract fun weatherDao(): CurrentWeatherDao
 
     companion object{
         private var INSTANCE: WeatherDB? = null

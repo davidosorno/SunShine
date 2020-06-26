@@ -6,14 +6,17 @@
     <data>
         <variable
             name="today"
-            type="com.dog.sunshine.data.weather.current.Current" />
+            type="com.dog.sunshine.data.weather.CurrentWeather" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_current_weather"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:elevation="@dimen/defaultElevation">
+        android:elevation="@dimen/defaultElevation"
+        android:visibility="invisible"
+        tools:visibility="visible">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
@@ -40,12 +43,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/defaultMargin"
             android:contentDescription="@string/location_description"
+            android:text="@{today.cityName}"
             android:textSize="@dimen/titleTextSize"
             app:layout_constraintEnd_toEndOf="@+id/txt_date"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/imageView4"
             app:layout_constraintTop_toTopOf="parent"
-            app:setStringValue="@{today.cityName}"
             tools:text="San Jose" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -70,7 +73,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/txt_current_temp"
             app:setImage="@{today.icon}"
-            app:srcCompat="@drawable/ic_clear" />
+            tools:srcCompat="@drawable/ic_clear" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_weather_description"
@@ -93,7 +96,8 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/txt_high_temperature"
             app:layout_constraintTop_toBottomOf="@+id/txt_date"
-            app:setTemp="@{today.temp}"
+            app:nameResource='@{"degrees_value"}'
+            app:setValue="@{today.temp}"
             tools:text="30\u00b0" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -105,7 +109,8 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="@+id/txt_low_temperature"
-            app:setTemp="@{today.max}"
+            app:nameResource='@{"degrees_value"}'
+            app:setValue="@{today.max}"
             tools:text="18\u00b0" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -117,9 +122,9 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/txt_high_temperature"
             app:layout_constraintTop_toBottomOf="@+id/txt_current_temp"
-            app:setTemp="@{today.min}"
+            app:nameResource='@{"degrees_value"}'
+            app:setValue="@{today.min}"
             tools:text="18\u00b0" />
-
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
@@ -128,7 +133,7 @@
             android:textSize="26sp"
             app:layout_constraintEnd_toStartOf="@+id/txt_low_temperature"
             app:layout_constraintStart_toEndOf="@+id/txt_high_temperature"
-            app:layout_constraintTop_toTopOf="@+id/txt_low_temperature" />
+            app:layout_constraintTop_toTopOf="@+id/txt_high_temperature" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

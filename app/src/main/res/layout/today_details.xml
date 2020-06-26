@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
             name="today"
-            type="com.dog.sunshine.data.weather.current.Current" />
+            type="com.dog.sunshine.data.weather.CurrentWeather" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/defaultMargin"
         android:background="@color/detail_accent_pane_background"
+        android:padding="@dimen/defaultMargin"
         android:theme="@style/AppTheme.Detail">
 
 
@@ -23,35 +22,97 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.4" />
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_sunrise"
+            android:layout_width="@dimen/sunstate"
+            android:layout_height="@dimen/sunstate"
+            android:layout_marginStart="@dimen/defaultMargin"
+            android:src="@drawable/ic_clear"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_sunrise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/img_sunrise"
+            app:layout_constraintStart_toEndOf="@+id/img_sunrise"
+            app:layout_constraintTop_toTopOf="@+id/img_sunrise"
+            app:setHour="@{today.sunrise}"
+            tools:text="@string/app_name" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_sunset"
+            android:layout_width="@dimen/sunstate"
+            android:layout_height="@dimen/sunstate"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/moon"
+            app:layout_constraintBottom_toBottomOf="@+id/img_sunrise"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="@+id/img_sunrise" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_sunset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/img_sunset"
+            app:layout_constraintStart_toEndOf="@+id/img_sunset"
+            app:layout_constraintTop_toTopOf="@+id/img_sunset"
+            app:setHour="@{today.sunset}"
+            tools:text="@string/app_name" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/appCompatTextView_feels_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/defaultMargin"
+            android:text="@string/feels_like"
+            app:layout_constraintBottom_toTopOf="@+id/appCompatTextView"
+            app:layout_constraintEnd_toStartOf="@+id/txt_sunrise"
+            app:layout_constraintStart_toStartOf="@+id/img_sunrise"
+            app:layout_constraintTop_toBottomOf="@+id/txt_sunrise" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_feels_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView_feels_like"
+            app:layout_constraintStart_toStartOf="@+id/img_sunset"
+            app:layout_constraintTop_toTopOf="@+id/appCompatTextView_feels_like"
+            app:nameResource='@{"degrees_value"}'
+            app:setValue="@{today.feelsLike}"
+            tools:text="@string/degrees_value" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/appCompatTextView"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/defaultMargin"
             android:text="@string/humidity"
             app:layout_constraintBottom_toTopOf="@+id/appCompatTextView2"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="@+id/appCompatTextView_feels_like"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView_feels_like" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_humidity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView"
+            app:layout_constraintStart_toStartOf="@+id/txt_feels_like"
             app:layout_constraintTop_toTopOf="@+id/appCompatTextView"
-            app:setHumidity="@{today.humidity}"/>
+            app:nameResource='@{"humidity_value"}'
+            app:setValue="@{today.humidity}"
+            tools:text="@string/humidity_value" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/appCompatTextView2"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/defaultMargin"
             android:text="@string/pressure"
             app:layout_constraintBottom_toTopOf="@+id/appCompatTextView3"
-            app:layout_constraintEnd_toEndOf="@+id/appCompatTextView"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/appCompatTextView"
             app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" />
 
@@ -59,18 +120,20 @@
             android:id="@+id/txt_pressure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView2"
+            app:layout_constraintStart_toStartOf="@+id/txt_humidity"
             app:layout_constraintTop_toTopOf="@+id/appCompatTextView2"
-            app:setHighPressure="@{today.pressure}"/>
+            app:nameResource='@{"pressure_value"}'
+            app:setValue="@{today.pressure}"
+            tools:text="@string/pressure_value" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/appCompatTextView3"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/defaultMargin"
             android:text="@string/wind"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/appCompatTextView2"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintBottom_toTopOf="@+id/appCompatTextView5"
             app:layout_constraintStart_toStartOf="@+id/appCompatTextView2"
             app:layout_constraintTop_toBottomOf="@+id/appCompatTextView2" />
 
@@ -78,8 +141,32 @@
             android:id="@+id/txt_wind"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView3"
+            app:layout_constraintStart_toStartOf="@+id/txt_pressure"
             app:layout_constraintTop_toTopOf="@+id/appCompatTextView3"
-            app:setWind="@{today.wind}"/>
+            app:nameResource='@{"wind_speed_value"}'
+            app:setValue="@{today.wind}"
+            tools:text="@string/wind_speed_value" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/appCompatTextView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/defaultMargin"
+            android:text="@string/wind_deg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/appCompatTextView3"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView3" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_wind_deg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView5"
+            app:layout_constraintStart_toStartOf="@+id/txt_wind"
+            app:layout_constraintTop_toTopOf="@+id/appCompatTextView5"
+            app:nameResource='@{"degrees_value"}'
+            app:setValue="@{today.winddegrees}"
+            tools:text="@string/degrees_value" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

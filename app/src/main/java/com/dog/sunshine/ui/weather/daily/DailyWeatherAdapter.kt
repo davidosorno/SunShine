@@ -3,12 +3,12 @@ package com.dog.sunshine.ui.weather.daily
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.dog.sunshine.data.weather.current.Current
+import com.dog.sunshine.data.weather.CurrentWeather
 import com.dog.sunshine.databinding.ItemWeatherDailyBinding
 
 class DailyWeatherAdapter(
-    private val listDaily: List<Current>,
-    private val clickListener: (Current) -> Unit
+    private val listDaily: List<CurrentWeather>,
+    private val clickListener: (CurrentWeather) -> Unit
 ): RecyclerView.Adapter<DailyWeatherViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DailyWeatherViewHolder {
@@ -24,9 +24,9 @@ class DailyWeatherAdapter(
     }
 
     override fun onBindViewHolder(holder: DailyWeatherViewHolder, position: Int) {
-        val current: Current = listDaily[position]
+        val currentWeather: CurrentWeather = listDaily[position]
         holder.bindData(
-            current,
+            currentWeather,
             clickListener
         )
     }

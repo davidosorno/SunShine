@@ -7,10 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.dog.sunshine.R
-import com.dog.sunshine.data.weather.current.Current
+import com.dog.sunshine.data.weather.CurrentWeather
 import com.dog.sunshine.databinding.FragmentDetailWeatherBinding
 import com.dog.sunshine.util.WEATHER_TABLE_NAME
-import kotlinx.android.synthetic.main.weather_fragment.view.today_layout
 
 
 class DetailWeatherFragment : Fragment() {
@@ -27,9 +26,20 @@ class DetailWeatherFragment : Fragment() {
             container,
             false
         )
-        val weather: Current = arguments?.getParcelable(WEATHER_TABLE_NAME)!!
-        binding.todayLayout.today = weather
-        binding.detailLayout.today = weather
+        val weather: CurrentWeather? = arguments?.getParcelable(WEATHER_TABLE_NAME)
+        weather?.let {
+            binding.todayLayout.today = weather
+            binding.detailLayout.today = weather
+            binding.todayLayout.constraintCurrentWeather.visibility = View.VISIBLE
+        }
+
+        binding.imgBack?.setOnClickListener {
+            closeFragmentDetails()
+        }
         return binding.root
+    }
+
+    private fun closeFragmentDetails() {
+        requireActivity().onBackPressed()
     }
 }

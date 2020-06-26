@@ -8,6 +8,7 @@
 <!--    Icon-->
     <dimen name="todayIcon">96dp</dimen>
     <dimen name="listIcon">40dp</dimen>
+    <dimen name="sunstate">64dp</dimen>
 
 <!--    Text-->
     <dimen name="defaultTextSize">12sp</dimen>

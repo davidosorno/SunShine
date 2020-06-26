@@ -1,6 +1,7 @@
 package com.dog.sunshine.util
 
 import android.content.Context
+import android.content.res.Resources
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
@@ -60,4 +61,13 @@ fun Context.isInternetAvailable(): Boolean{
         }
     }
     return result
+}
+
+fun Context.resourceIdByName(resourceName: String): Int{
+    try {
+        return resources.getIdentifier(resourceName, "string", this.packageName)
+//        return resources.getIdentifier(resourceName, "string", this.packageName)
+    }catch (ex: Resources.NotFoundException){
+        throw Resources.NotFoundException()
+    }
 }

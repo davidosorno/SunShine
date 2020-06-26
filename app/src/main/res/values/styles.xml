@@ -22,6 +22,7 @@
         <item name="background">@color/detail_accent_pane_background</item>
     </style>
 
+<!--    Labels on main screen-->
     <style name="fragmentLabels" parent="TextAppearance.AppCompat.Title">
         <item name="android:layout_width">100dp</item>
         <item name="android:layout_height">wrap_content</item>

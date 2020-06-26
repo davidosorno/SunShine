@@ -1,6 +1,7 @@
-package com.dog.sunshine.data.weather.current
+package com.dog.sunshine.data.weather
 
 import android.os.Parcelable
+import androidx.annotation.Keep
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -32,11 +33,13 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 @Entity(indices = [
+        Index("id"),
         Index(COLUMN_DATE)
     ]
 )
+@Keep
 @Parcelize
-data class Current(
+data class CurrentWeather(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0L,
 
@@ -53,7 +56,7 @@ data class Current(
 
     @NonNull
     @ColumnInfo(name = COLUMN_FEELS_LIKE)
-    val feelsLike: Float = 0F,
+    val feelsLike: Int = 0,
 
     @NonNull
     @ColumnInfo(name = COLUMN_MAX_TEMP)
@@ -97,7 +100,7 @@ data class Current(
 
     @NonNull
     @ColumnInfo(name = COLUMN_ICON_WEATHER)
-    val icon: String,
+    val icon: String? = null,
 
     @NonNull
     @ColumnInfo(name = COLUMN_MAIN)
@@ -119,7 +122,7 @@ data class Current(
     @ColumnInfo(name = COLUMN_SUNRISE_TIME)
     val sunrise: Long,
 
-    val arrHourly: @RawValue List<Current> = ArrayList(), //MainData
+    val arrHourly: @RawValue List<CurrentWeather> = ArrayList(), //MainData
 
-    val arrDaily: @RawValue List<Current> = ArrayList() //Daily
+    val arrDaily: @RawValue List<CurrentWeather> = ArrayList() //Daily
     ):Parcelable

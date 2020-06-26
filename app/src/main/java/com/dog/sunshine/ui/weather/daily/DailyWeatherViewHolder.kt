@@ -1,17 +1,16 @@
 package com.dog.sunshine.ui.weather.daily
 
 import androidx.recyclerview.widget.RecyclerView
-import com.dog.sunshine.data.networkservice.Daily
-import com.dog.sunshine.data.weather.current.Current
+import com.dog.sunshine.data.weather.CurrentWeather
 import com.dog.sunshine.databinding.ItemWeatherDailyBinding
 
 
 class DailyWeatherViewHolder(val binding: ItemWeatherDailyBinding): RecyclerView.ViewHolder(binding.root) {
 
-    fun bindData(current: Current, clickListener: (Current) -> Unit){
-        binding.daily = current
+    fun bindData(currentWeather: CurrentWeather, clickListener: (CurrentWeather) -> Unit){
+        binding.daily = currentWeather
         itemView.setOnClickListener {
-            clickListener(current)
+            clickListener(currentWeather)
         }
         binding.executePendingBindings()
     }

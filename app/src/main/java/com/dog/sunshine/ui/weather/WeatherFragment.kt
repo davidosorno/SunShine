@@ -13,7 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.dog.sunshine.R
-import com.dog.sunshine.data.weather.current.Current
+import com.dog.sunshine.data.weather.CurrentWeather
 import com.dog.sunshine.databinding.WeatherFragmentBinding
 import com.dog.sunshine.ui.weather.daily.DailyWeatherAdapter
 import com.dog.sunshine.ui.weather.hourly.WeatherHourlyAdapter
@@ -52,14 +52,15 @@ class WeatherFragment : Fragment() {
 
         viewModel.currentWeather.observe(viewLifecycleOwner, Observer { lastDateLoaded ->
             lastDateLoaded?.let {
-                binding.root.pb_loading_indicator.visibility = View.INVISIBLE
-                    binding.root.today_layout.visibility = View.VISIBLE
+                    binding.root.pb_loading_indicator.visibility = View.INVISIBLE
+                    binding.todayLayout.constraintCurrentWeather.visibility = View.VISIBLE
 
-                    val dailyAdapter = DailyWeatherAdapter(
+                val dailyAdapter = DailyWeatherAdapter(
                         it.arrDaily
-                    ){current ->
-                        onItemClick(current)
+                    ){currentWeather ->
+                        onItemClick(currentWeather)
                     }
+
                     binding.root.recycler_list_weather.adapter = dailyAdapter
                     binding.todayLayout.today = lastDateLoaded
                     viewModel.checkTodayLoaded(lastDateLoaded.date)
@@ -87,6 +88,8 @@ class WeatherFragment : Fragment() {
         viewModel.canLoadTodayWeather.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if(it && viewModel.location.value != null){
+                    binding.root.pb_loading_indicator.visibility = View.VISIBLE
+                    binding.todayLayout.constraintCurrentWeather.visibility = View.INVISIBLE
                     viewModel.getData()
                 }
                 viewModel.cancelLoadingData()
@@ -107,11 +110,12 @@ class WeatherFragment : Fragment() {
         activity?.finish()
     }
 
-    private fun onItemClick(current: Current) {
+    private fun onItemClick(currentWeather: CurrentWeather) {
         findNavController().navigate(
-            WeatherFragmentDirections.actionNavWeatherToDetailWeather(current)
+            WeatherFragmentDirections.actionNavWeatherToDetailWeather(currentWeather)
         )
     }
+
 
     override fun onStart() {
         super.onStart()

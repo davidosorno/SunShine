@@ -3,7 +3,7 @@
     <data>
         <variable
             name="hourly"
-            type="com.dog.sunshine.data.weather.current.Current" />
+            type="com.dog.sunshine.data.weather.CurrentWeather" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -22,7 +22,8 @@
         app:layout_constraintStart_toStartOf="@+id/txt_hour"
         app:layout_constraintTop_toBottomOf="@+id/txt_hour"
         tools:text="30\u00b0"
-        app:setTemp="@{hourly.temp}"/>
+        app:nameResource='@{"degrees_value"}'
+        app:setValue="@{hourly.temp}"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txt_hour"

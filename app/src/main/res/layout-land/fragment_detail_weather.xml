@@ -8,7 +8,8 @@
         android:background="@color/colorPrimary"
         tools:context=".MainActivity"
         android:gravity="center_vertical"
-        android:baselineAligned="false">
+        android:baselineAligned="false"
+        android:theme="@style/AppTheme">
 
         <include
             android:id="@+id/today_layout"

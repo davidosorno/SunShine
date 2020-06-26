@@ -31,7 +31,7 @@ interface WeatherApiService {
             retrofit.create(WeatherApiService::class.java)
         }
 
-        suspend fun getCurrentWeatherByGeoLocation(lat: Float, lon: Float): CurrentWeatherJsonObject{
+        suspend fun getCurrentWeatherByGeoLocation(lat: Float, lon: Float): CurrentWeatherJsonObject?{
             return retrofitService.getCurrentWeatherByGeoLocation(
                 lat,
                 lon
@@ -58,7 +58,7 @@ interface WeatherApiService {
         @Query("units") units: String = "metric",
         @Query("exclude") exclude: String = "minutely",
         @Query("appid") api_key: String = ApiKey.key()
-    ):Deferred<CurrentWeatherJsonObject>
+    ):Deferred<CurrentWeatherJsonObject?>
 
 
 //    @GET("onecall")

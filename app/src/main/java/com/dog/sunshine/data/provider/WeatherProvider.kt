@@ -8,14 +8,14 @@ import android.database.Cursor
 import android.net.Uri
 import com.dog.sunshine.data.WeatherDB
 import com.dog.sunshine.data.provider.WeatherContract.Companion.AUTHORITY
-import com.dog.sunshine.data.weather.current.Current
-import com.dog.sunshine.data.weather.current.CurrentDao
+import com.dog.sunshine.data.weather.CurrentWeather
+import com.dog.sunshine.data.weather.CurrentWeatherDao
 import com.dog.sunshine.util.WEATHER_TABLE_NAME
 
 class WeatherProvider: ContentProvider() {
 
 //    define access to database
-    private lateinit var currentDao: CurrentDao
+    private lateinit var currentWeatherDao: CurrentWeatherDao
 
     /*
      * These constant will be used to match URIs with the data they are looking for. We will take
@@ -38,8 +38,8 @@ class WeatherProvider: ContentProvider() {
     }
 
     override fun bulkInsert(uri: Uri, values: Array<out ContentValues>): Int {
-        val currentValues: ArrayList<Current> = ArrayList()
-        currentDao = WeatherDB.getInstance(context!!).weatherDao()
+        val currentWeatherValues: ArrayList<CurrentWeather> = ArrayList()
+        currentWeatherDao = WeatherDB.getInstance(context!!).weatherDao()
 
         //TODO create the good way to access by content provider
         when(sUriMatcher.match(uri)) {
@@ -47,14 +47,14 @@ class WeatherProvider: ContentProvider() {
                 for (v: ContentValues in values) {
 //                    weatherValues.add(v.getStructure(v))
                 }
-                currentDao.insertAll(*currentValues.toTypedArray())
+                currentWeatherDao.insertAll(*currentWeatherValues.toTypedArray())
             }
 
             CODE_WEATHER_WITH_DATE -> {
 
             }
         }
-        return currentValues.size
+        return currentWeatherValues.size
     }
 
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
@@ -71,11 +71,11 @@ class WeatherProvider: ContentProvider() {
         var cursor: Cursor? = null
         when(sUriMatcher.match(uri)){
             CODE_WEATHER -> {
-                cursor = currentDao.getAllInCursor()
+                cursor = currentWeatherDao.getAllInCursor()
             }
 
             CODE_WEATHER_WITH_DATE -> {
-                cursor = currentDao.getByDateInCursor(ContentUris.parseId(uri))
+                cursor = currentWeatherDao.getByDateInCursor(ContentUris.parseId(uri))
             }
         }
         cursor?.setNotificationUri(context!!.contentResolver!!, uri)

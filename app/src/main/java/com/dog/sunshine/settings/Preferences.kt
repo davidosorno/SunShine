@@ -1,4 +1,4 @@
-package com.dog.sunshine.data
+package com.dog.sunshine.settings
 
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat

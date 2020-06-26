@@ -4,29 +4,25 @@ import android.content.Context
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.paging.PagedList
+import androidx.lifecycle.*
 import com.dog.sunshine.R
 import com.dog.sunshine.data.networkservice.WeatherApiService
 import com.dog.sunshine.data.networkservice.CurrentWeatherJsonObject
-import com.dog.sunshine.data.weather.current.Current
-import com.dog.sunshine.data.weather.current.CurrentRepository
+import com.dog.sunshine.data.weather.CurrentWeather
+import com.dog.sunshine.data.weather.CurrentWeatherRepository
 import com.dog.sunshine.util.JsonObjectToWeather
 import com.dog.sunshine.util.canLoadTodayWeather
 import kotlinx.coroutines.*
 import java.util.*
 
 class WeatherViewModel(
-    private val currentRepository: CurrentRepository
+    private val currentWeatherRepository: CurrentWeatherRepository
 ): ViewModel() {
 
     private val job = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + job)
 
-    val currentWeather = MediatorLiveData<Current>()
+    val currentWeather = MediatorLiveData<CurrentWeather>()
 
     private val _showError = MutableLiveData<Int>()
     val showError: LiveData<Int>
@@ -43,26 +39,28 @@ class WeatherViewModel(
     private var cityName = ""
 
     init {
-        currentWeather.addSource(currentRepository.getCurrentAndDaily(), currentWeather::setValue)
+        currentWeather.addSource(currentWeatherRepository.getCurrentAndDaily(), currentWeather::setValue)
     }
 
     fun getData() {
-//        uiScope.launch {
-//            if(!getDataFromApi(cityName)) {
-//                _showError.value = R.string.error_loading_data
-//            }
-//        }
+        uiScope.launch {
+            if(!getDataFromApi(cityName)) {
+                _showError.value = R.string.error_loading_data
+            }
+        }
     }
 
     private suspend fun getDataFromApi(cityName: String):Boolean{
         var success: Long = 0
         withContext(Dispatchers.IO){
-            val jsonObjectCurrent: CurrentWeatherJsonObject = WeatherApiService.WeatherApi.getCurrentWeatherByGeoLocation(
+            val jsonObjectCurrent: CurrentWeatherJsonObject? = WeatherApiService.WeatherApi.getCurrentWeatherByGeoLocation(
                 location.value!!.latitude.toFloat(),
                 location.value!!.longitude.toFloat()
             )
-            val current: Current = JsonObjectToWeather.getDataFromJsonObject(jsonObjectCurrent, cityName)
-            success = currentRepository.insert(current)
+            jsonObjectCurrent?.let {
+                val currentWeather: CurrentWeather = JsonObjectToWeather.getDataFromJsonObject(jsonObjectCurrent, cityName)
+                success = currentWeatherRepository.insert(currentWeather)
+            }
         }
         return success > 0
     }

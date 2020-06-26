@@ -11,7 +11,7 @@ buildscript {
         lifecycle_extension_version = "2.2.0"
         moshi_version = "1.9.2"
         navigation_version = "2.2.2"
-        navigation_safe_args_version = "1.0.0"
+        navigation_safe_args_version = "2.3.0-rc01"
         paged_version = "2.1.2"
         preference_version = "1.1.1"
         recycler_view_version = "1.1.0"
@@ -27,7 +27,9 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:4.0.0"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:$navigation_safe_args_version"
+//        classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:$navigation_safe_args_version"
+        //    Send parcelables through Navigation component
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_safe_args_version"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

@@ -1,7 +1,7 @@
 package com.dog.sunshine.data
 
 import androidx.room.TypeConverter
-import com.dog.sunshine.data.weather.current.Current
+import com.dog.sunshine.data.weather.CurrentWeather
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.util.*
@@ -21,14 +21,14 @@ class Converters {
     }
 
     @TypeConverter
-    fun fromArrayCurrentToString(list: List<Current>): String{
+    fun fromArrayCurrentToString(list: List<CurrentWeather>): String{
         val gson = Gson()
         return gson.toJson(list)
     }
 
     @TypeConverter
-    fun fromStringToArrayCurrent(str: String): List<Current>{
-        val listType = object : TypeToken<List<Current>>() {}.type
+    fun fromStringToArrayCurrent(str: String): List<CurrentWeather>{
+        val listType = object : TypeToken<List<CurrentWeather>>() {}.type
         return Gson().fromJson(str, listType)
     }
 }

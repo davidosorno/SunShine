@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "fb08195f6f61e9ed40696002317016b5",
+    "identityHash": "c94bb3e9200d88d128472322a55f4c9d",
     "entities": [
       {
-        "tableName": "Current",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `date` INTEGER NOT NULL, `weather_id` INTEGER NOT NULL, `current_temp` INTEGER NOT NULL, `feels_like` REAL NOT NULL, `max` INTEGER NOT NULL, `min` INTEGER NOT NULL, `humidity` INTEGER NOT NULL, `pressure` REAL NOT NULL, `dew_point` REAL NOT NULL, `clouds` REAL NOT NULL, `uvi` REAL NOT NULL, `visibility` INTEGER NOT NULL, `wind` INTEGER NOT NULL, `degrees` INTEGER NOT NULL, `icon` TEXT NOT NULL, `main` TEXT NOT NULL, `description` TEXT NOT NULL, `city-name` TEXT NOT NULL, `sunset` INTEGER NOT NULL, `sunrise` INTEGER NOT NULL, `arrHourly` TEXT NOT NULL, `arrDaily` TEXT NOT NULL)",
+        "tableName": "CurrentWeather",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `date` INTEGER NOT NULL, `weather_id` INTEGER NOT NULL, `current_temp` INTEGER NOT NULL, `feels_like` INTEGER NOT NULL, `max` INTEGER NOT NULL, `min` INTEGER NOT NULL, `humidity` INTEGER NOT NULL, `pressure` REAL NOT NULL, `dew_point` REAL NOT NULL, `clouds` REAL NOT NULL, `uvi` REAL NOT NULL, `visibility` INTEGER NOT NULL, `wind` INTEGER NOT NULL, `degrees` INTEGER NOT NULL, `icon` TEXT NOT NULL, `main` TEXT NOT NULL, `description` TEXT NOT NULL, `city-name` TEXT NOT NULL, `sunset` INTEGER NOT NULL, `sunrise` INTEGER NOT NULL, `arrHourly` TEXT NOT NULL, `arrDaily` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -35,7 +35,7 @@
           {
             "fieldPath": "feelsLike",
             "columnName": "feels_like",
-            "affinity": "REAL",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -155,12 +155,20 @@
         },
         "indices": [
           {
-            "name": "index_Current_date",
+            "name": "index_CurrentWeather_id",
+            "unique": false,
+            "columnNames": [
+              "id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_CurrentWeather_id` ON `${TABLE_NAME}` (`id`)"
+          },
+          {
+            "name": "index_CurrentWeather_date",
             "unique": false,
             "columnNames": [
               "date"
             ],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_Current_date` ON `${TABLE_NAME}` (`date`)"
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_CurrentWeather_date` ON `${TABLE_NAME}` (`date`)"
           }
         ],
         "foreignKeys": []
@@ -169,7 +177,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'fb08195f6f61e9ed40696002317016b5')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c94bb3e9200d88d128472322a55f4c9d')"
     ]
   }
 }

@@ -15,20 +15,21 @@
     <string name="snow">Snow</string>
 
     <string name="humidity">Humidity</string>
+    <string name="feels_like">Feels like</string>
     <string name="pressure">Pressure</string>
     <string name="wind">Wind</string>
+    <string name="wind_deg">Wind Deg.</string>
 
     <!--    Content Provider Authority-->
     <string name="content_authority">com.dog.sunshine.data.provider</string>
 
 <!--    Replace values-->
-    <string name="value_temp">%d\u00b0</string>
+    <string name="degrees_value">%d\u00b0</string>
     <string name="weatherDescription">%s</string>
     <string name="humidity_value">%d\u2030</string>
-    <string name="pressure_value">%fhPa</string>
-    <string name="wind_speed">%dkm/h N</string>
-
-    <string name="concatExample">%s %s</string>
+    <string name="pressure_value">%1.2fhPa</string>
+    <string name="pressure_value_name">pressure_value</string>
+    <string name="wind_speed_value">%dkm/h N</string>
 
 <!--    ERROR MESSAGES-->
     <string name="location_permission_denied">Weather app needs Location access to show you the accurate results.</string>
