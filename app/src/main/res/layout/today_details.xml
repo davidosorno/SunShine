@@ -47,7 +47,7 @@
             android:id="@+id/img_sunset"
             android:layout_width="@dimen/sunstate"
             android:layout_height="@dimen/sunstate"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/defaultMargin"
             android:src="@drawable/moon"
             app:layout_constraintBottom_toBottomOf="@+id/img_sunrise"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -68,9 +68,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/defaultMargin"
+            android:layout_marginStart="@dimen/defaultMargin"
             android:text="@string/feels_like"
             app:layout_constraintBottom_toTopOf="@+id/appCompatTextView"
-            app:layout_constraintEnd_toStartOf="@+id/txt_sunrise"
             app:layout_constraintStart_toStartOf="@+id/img_sunrise"
             app:layout_constraintTop_toBottomOf="@+id/txt_sunrise" />
 
@@ -78,6 +78,7 @@
             android:id="@+id/txt_feels_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/defaultMargin"
             app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView_feels_like"
             app:layout_constraintStart_toStartOf="@+id/img_sunset"
             app:layout_constraintTop_toTopOf="@+id/appCompatTextView_feels_like"

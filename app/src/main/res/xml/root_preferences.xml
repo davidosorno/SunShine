@@ -1,0 +1,12 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        app:defaultValue="@string/imperial"
+        app:entries="@array/degrees_entries"
+        app:entryValues="@array/degrees_values"
+        app:key="@string/type_degrees_key"
+        app:title="@string/pref_units"
+        app:useSimpleSummaryProvider="true"/>
+
+</PreferenceScreen>

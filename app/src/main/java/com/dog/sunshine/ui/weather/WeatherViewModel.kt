@@ -4,6 +4,8 @@ import android.content.Context
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.*
 import com.dog.sunshine.R
 import com.dog.sunshine.data.networkservice.WeatherApiService
@@ -11,6 +13,7 @@ import com.dog.sunshine.data.networkservice.CurrentWeatherJsonObject
 import com.dog.sunshine.data.weather.CurrentWeather
 import com.dog.sunshine.data.weather.CurrentWeatherRepository
 import com.dog.sunshine.util.JsonObjectToWeather
+import com.dog.sunshine.util.MEASUREMENT_UNITS
 import com.dog.sunshine.util.canLoadTodayWeather
 import kotlinx.coroutines.*
 import java.util.*
@@ -40,6 +43,10 @@ class WeatherViewModel(
 
     init {
         currentWeather.addSource(currentWeatherRepository.getCurrentAndDaily(), currentWeather::setValue)
+        when(MEASUREMENT_UNITS){
+            "C" -> Log.i("DSG", "C")
+            "F" -> Log.i("DSG", "F")
+        }
     }
 
     fun getData() {

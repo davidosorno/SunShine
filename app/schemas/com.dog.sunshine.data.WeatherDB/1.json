@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "c94bb3e9200d88d128472322a55f4c9d",
+    "identityHash": "31c41c329453436226d737b7d3f85b6b",
     "entities": [
       {
         "tableName": "CurrentWeather",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `date` INTEGER NOT NULL, `weather_id` INTEGER NOT NULL, `current_temp` INTEGER NOT NULL, `feels_like` INTEGER NOT NULL, `max` INTEGER NOT NULL, `min` INTEGER NOT NULL, `humidity` INTEGER NOT NULL, `pressure` REAL NOT NULL, `dew_point` REAL NOT NULL, `clouds` REAL NOT NULL, `uvi` REAL NOT NULL, `visibility` INTEGER NOT NULL, `wind` INTEGER NOT NULL, `degrees` INTEGER NOT NULL, `icon` TEXT NOT NULL, `main` TEXT NOT NULL, `description` TEXT NOT NULL, `city-name` TEXT NOT NULL, `sunset` INTEGER NOT NULL, `sunrise` INTEGER NOT NULL, `arrHourly` TEXT NOT NULL, `arrDaily` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `date` INTEGER NOT NULL, `weather_id` INTEGER NOT NULL, `current_temp` INTEGER NOT NULL, `feels_like` INTEGER NOT NULL, `max` INTEGER NOT NULL, `min` INTEGER NOT NULL, `humidity` INTEGER NOT NULL, `pressure` REAL NOT NULL, `dew_point` REAL NOT NULL, `clouds` REAL NOT NULL, `uvi` REAL NOT NULL, `visibility` INTEGER NOT NULL, `wind` INTEGER NOT NULL, `degrees` INTEGER NOT NULL, `icon` TEXT, `main` TEXT NOT NULL, `description` TEXT NOT NULL, `city-name` TEXT NOT NULL, `sunset` INTEGER NOT NULL, `sunrise` INTEGER NOT NULL, `arrHourly` TEXT NOT NULL, `arrDaily` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -102,7 +102,7 @@
             "fieldPath": "icon",
             "columnName": "icon",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "main",
@@ -177,7 +177,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c94bb3e9200d88d128472322a55f4c9d')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '31c41c329453436226d737b7d3f85b6b')"
     ]
   }
 }

@@ -27,16 +27,16 @@ class JsonObjectToWeather {
                 sunrise = jsonCurrent.current.sunrise,
                 sunset = jsonCurrent.current.sunset,
                 feelsLike = jsonCurrent.current.feels_like.toInt(),
-                arrHourly = hourlyList(jsonCurrent.hourly, cityName),
-                arrDaily = dailyList(jsonCurrent.daily, cityName).drop(1) //remove the first element because it is the Current weather that it already has been loaded
+                //remove the first element because it is the hourly weather that it already has been loaded and I just want to take 12 hours but the query has 48 hours
+                arrHourly = hourlyList(jsonCurrent.hourly, cityName).drop(1).dropLast(35),
+                //remove the first element because it is the Current weather that it already has been loaded and I just want to take 6 days
+                arrDaily = dailyList(jsonCurrent.daily, cityName).drop(1).dropLast(1)
             )
         }
 
         private fun dailyList(daily: Array<Daily>, cityName: String): List<CurrentWeather> {
             val list = ArrayList<CurrentWeather>()
-            var count = 0
             for(item in daily){
-                count++
                 list.add(
                     CurrentWeather(
                         date = Date(item.dt * 1000),
@@ -50,6 +50,7 @@ class JsonObjectToWeather {
                         dewPoint = item.dew_point,
                         clouds = item.clouds,
                         uvi = item.uvi,
+                        icon = item.weather[0].icon,
                         visibility = item.visibility,
                         wind = item.wind_speed.toInt(),
                         winddegrees = item.wind_deg.toInt(),
@@ -58,15 +59,13 @@ class JsonObjectToWeather {
                         cityName = cityName
                     )
                 )
-                if(count == 6) break //I just take 6 days to show to the user
             }
             return list
         }
 
         private fun hourlyList(hourly: Array<CurrentWeatherMainData>, cityName: String): List<CurrentWeather> {
             val list = ArrayList<CurrentWeather>()
-            for((count, item) in hourly.withIndex()){
-                if(count > 0) //I do not want to take the same hour that current already has
+            for(item in hourly){
                 list.add(
                     CurrentWeather(
                         date = Date(item.dt * 1000),
@@ -83,11 +82,11 @@ class JsonObjectToWeather {
                         wind = item.wind_speed.toInt(),
                         winddegrees = item.wind_deg.toInt(),
                         main = item.weather[0].main,
+                        icon = item.weather[0].icon,
                         description = item.weather[0].description,
                         cityName = cityName
                     )
                 )
-                if(count == 12) break //I just take 12 hours to show to the user
             }
             return list
         }

@@ -7,6 +7,7 @@ const val WEATHER_TABLE_NAME = "weather"
 
 const val API_URL = "https://api.openweathermap.org/data/2.5/"
 
+var MEASUREMENT_UNITS = "F"
 
 
 //The purpouse for this parameter and function is to test the application
