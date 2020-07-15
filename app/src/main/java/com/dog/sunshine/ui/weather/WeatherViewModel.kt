@@ -12,9 +12,7 @@ import com.dog.sunshine.data.networkservice.WeatherApiService
 import com.dog.sunshine.data.networkservice.CurrentWeatherJsonObject
 import com.dog.sunshine.data.weather.CurrentWeather
 import com.dog.sunshine.data.weather.CurrentWeatherRepository
-import com.dog.sunshine.util.JsonObjectToWeather
-import com.dog.sunshine.util.MEASUREMENT_UNITS
-import com.dog.sunshine.util.canLoadTodayWeather
+import com.dog.sunshine.util.*
 import kotlinx.coroutines.*
 import java.util.*
 
@@ -43,9 +41,9 @@ class WeatherViewModel(
 
     init {
         currentWeather.addSource(currentWeatherRepository.getCurrentAndDaily(), currentWeather::setValue)
-        when(MEASUREMENT_UNITS){
-            "C" -> Log.i("DSG", "C")
-            "F" -> Log.i("DSG", "F")
+        when(MEASUREMENT_UNIT){
+            METRIC -> Log.i("DSG", "Metric - C")
+            IMPERIAL -> Log.i("DSG", "Imperial - F")
         }
     }
 

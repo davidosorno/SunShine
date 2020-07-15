@@ -22,8 +22,7 @@
         app:layout_constraintStart_toStartOf="@+id/txt_hour"
         app:layout_constraintTop_toBottomOf="@+id/txt_hour"
         tools:text="30\u00b0"
-        app:nameResource='@{"degrees_value"}'
-        app:setValue="@{hourly.temp}"/>
+        app:setTemp="@{hourly.temp}" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txt_hour"

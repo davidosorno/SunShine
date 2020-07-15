@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "31c41c329453436226d737b7d3f85b6b",
+    "identityHash": "fd1aedd995db0aa1bfdc8bbde54c9059",
     "entities": [
       {
         "tableName": "CurrentWeather",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `date` INTEGER NOT NULL, `weather_id` INTEGER NOT NULL, `current_temp` INTEGER NOT NULL, `feels_like` INTEGER NOT NULL, `max` INTEGER NOT NULL, `min` INTEGER NOT NULL, `humidity` INTEGER NOT NULL, `pressure` REAL NOT NULL, `dew_point` REAL NOT NULL, `clouds` REAL NOT NULL, `uvi` REAL NOT NULL, `visibility` INTEGER NOT NULL, `wind` INTEGER NOT NULL, `degrees` INTEGER NOT NULL, `icon` TEXT, `main` TEXT NOT NULL, `description` TEXT NOT NULL, `city-name` TEXT NOT NULL, `sunset` INTEGER NOT NULL, `sunrise` INTEGER NOT NULL, `arrHourly` TEXT NOT NULL, `arrDaily` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `date` INTEGER NOT NULL, `weather_id` INTEGER NOT NULL, `current_temp` INTEGER NOT NULL, `feels_like` INTEGER NOT NULL, `max` INTEGER NOT NULL, `min` INTEGER NOT NULL, `humidity` INTEGER NOT NULL, `pressure` INTEGER NOT NULL, `dew_point` REAL NOT NULL, `clouds` INTEGER NOT NULL, `uvi` REAL NOT NULL, `visibility` INTEGER NOT NULL, `wind` INTEGER NOT NULL, `degrees` INTEGER NOT NULL, `icon` TEXT, `main` TEXT NOT NULL, `description` TEXT NOT NULL, `city-name` TEXT NOT NULL, `sunset` INTEGER NOT NULL, `sunrise` INTEGER NOT NULL, `arrHourly` TEXT NOT NULL, `arrDaily` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -59,7 +59,7 @@
           {
             "fieldPath": "pressure",
             "columnName": "pressure",
-            "affinity": "REAL",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -71,7 +71,7 @@
           {
             "fieldPath": "clouds",
             "columnName": "clouds",
-            "affinity": "REAL",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -177,7 +177,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '31c41c329453436226d737b7d3f85b6b')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'fd1aedd995db0aa1bfdc8bbde54c9059')"
     ]
   }
 }

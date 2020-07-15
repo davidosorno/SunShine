@@ -72,7 +72,7 @@ data class CurrentWeather(
 
     @NonNull
     @ColumnInfo(name = COLUMN_PRESSURE)
-    val pressure: Float,
+    val pressure: Int,
 
     @NonNull
     @ColumnInfo(name = COLUMN_DEW_POINT)
@@ -80,7 +80,7 @@ data class CurrentWeather(
 
     @NonNull
     @ColumnInfo(name = COLUMN_CLOUDS)
-    val clouds: Float = 0F,
+    val clouds: Int = 0,
 
     @NonNull
     @ColumnInfo(name = COLUMN_UVI)

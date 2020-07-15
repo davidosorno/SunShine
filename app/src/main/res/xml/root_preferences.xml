@@ -2,7 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ListPreference
-        app:defaultValue="@string/imperial"
+        app:defaultValue="@string/imperial_label"
         app:entries="@array/degrees_entries"
         app:entryValues="@array/degrees_values"
         app:key="@string/type_degrees_key"

@@ -61,8 +61,8 @@
             app:layout_constraintRight_toLeftOf="@+id/low_temperature"
             app:layout_constraintTop_toTopOf="@+id/guideline"
             tools:text="19\u00b0"
-            app:nameResource='@{"degrees_value"}'
-            app:setValue="@{daily.max}"/>
+            app:setTemp="@{daily.max}"/>
+
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/low_temperature"
@@ -73,8 +73,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline"
             tools:text="10\u00b0"
-            app:nameResource='@{"degrees_value"}'
-            app:setValue="@{daily.min}"/>
+            app:setTemp="@{daily.min}"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"

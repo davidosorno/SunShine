@@ -45,7 +45,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView6" />
+            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView6"
+            android:layout_marginEnd="@dimen/defaultMargin"/>
 
         <ProgressBar
             android:id="@+id/pb_loading_indicator"

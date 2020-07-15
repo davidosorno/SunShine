@@ -1,12 +1,12 @@
 <resources>
     <!-- Reply Preference -->
     <string-array name="degrees_entries">
-        <item>@string/metrics</item>
-        <item>@string/imperial</item>
+        <item>@string/metric_label</item>
+        <item>@string/imperial_label</item>
     </string-array>
 
     <string-array name="degrees_values">
-        <item>C</item>
-        <item>F</item>
+        <item>@string/metric_key</item>
+        <item>@string/imperial_key</item>
     </string-array>
 </resources>

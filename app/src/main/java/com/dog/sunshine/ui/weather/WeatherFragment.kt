@@ -119,6 +119,11 @@ class WeatherFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        binding.todayLayout.txtMeasurementUnits.text = when(MEASUREMENT_UNIT){
+            METRIC -> "C"
+            IMPERIAL -> "F"
+            else -> ""
+        }
         makePermissionRequest()
     }
 

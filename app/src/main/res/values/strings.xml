@@ -24,18 +24,26 @@
     <string name="content_authority">com.dog.sunshine.data.provider</string>
 
     <!--    Replace values-->
-    <string name="degrees_value" translatable="false">%d\u00b0</string>
+    <string name="temp_value" translatable="false">%d\u00b0</string>
+    <string name="wind_degrees_value" translatable="false">%d\u00b0</string>
     <string name="weatherDescription" translatable="false">%s</string>
     <string name="humidity_value" translatable="false">%d\u2030</string>
-    <string name="pressure_value" translatable="false">%1.2fhPa</string>
+    <string name="pressure_value" translatable="false">%dhPa</string>
     <string name="wind_speed_value" translatable="false">%dkm/h N</string>
 
     <!--    Settings preferences-->
     <string name="action_settings">Settings</string>
+    <string name="metric_label">Metric - \u00b0C</string>
+    <string name="imperial_label">Imperial - \u00b0F</string>
+
     <string name="type_degrees_key" translatable="false">type_degrees</string> <!-- Celsius or Fahrenheit-->
-    <string name="metrics">Metrics - \u00b0C</string>
-    <string name="imperial">Imperial - \u00b0F</string>
+    <string name="metric_key" translatable="false">metric</string>
+    <string name="imperial_key" translatable="false">imperial</string>
+
     <string name="pref_units">Temperature Untis</string>
+
+<!--    Type param to get the right measurement-->
+    <string name="temperature">Temperature</string>
 
 
     <!--    ERROR MESSAGES-->
